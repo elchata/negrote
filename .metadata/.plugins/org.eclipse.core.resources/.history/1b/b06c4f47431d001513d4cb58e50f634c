@@ -1,0 +1,34 @@
+package web;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import beans.Empresa;
+import beans.Medida;
+import service.ProductManager;
+
+
+@Controller
+public class InventoryController {
+    
+    @Autowired
+    private ProductManager productManager;
+    
+    public void setProductManager(ProductManager productManager) {
+        this.productManager = productManager;
+    }    
+
+    @RequestMapping(value="/hello.htm")
+    public String printHello(ModelMap model) {    	
+    	String now = (new Date()).toString();
+    	Categoria med = new Categoria();
+    	
+    	productManager.guardarCategoria(med);
+        model.addAttribute("now", now); 
+        return "hello";
+    }
+}

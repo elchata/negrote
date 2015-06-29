@@ -1,0 +1,63 @@
+package beans;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+public class Cliente  extends User{
+
+	private static final long serialVersionUID = 1L;
+	private List<Direccion> direcciones = new ArrayList<Direccion>(0);
+	private Map<Producto, Integer> visitas = new HashMap<Producto, Integer>();
+	private List<Pedido> pedidos = new ArrayList<Pedido>(0);
+	private Carrito carrito;
+	
+	
+	public List<Direccion> getDirecciones() {
+		return direcciones;
+	}
+	public void setDirecciones(List<Direccion> direcciones) {
+		this.direcciones = direcciones;
+	}
+	
+	@ElementCollection(fetch = FetchType.LAZY)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	public Map<Producto, Integer> getVisitas() {
+		return visitas;
+	}
+	public void setVisitas(Map<Producto, Integer> visitas) {
+		this.visitas = visitas;
+	}
+	
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "idCarrito")
+	public Carrito getCarrito() {
+		return carrito;
+	}
+	public void setCarrito(Carrito carrito) {
+		this.carrito = carrito;
+	}
+	
+	
+	
+
+}

@@ -1,0 +1,17 @@
+package implementaciones;
+
+import org.springframework.stereotype.Repository;
+
+import daos.CategoriaDAO;
+import daos.PrecioDAO;
+import beans.Categoria;
+import beans.Precio;
+
+@Repository(value = "precioModel")
+public class PrecioDAOHibernateJPA extends GenericDAOHibernateJPA<Precio>  implements PrecioDAO {		
+	
+		public PrecioDAOHibernateJPA() {
+			super(Precio.class);
+		}
+
+}

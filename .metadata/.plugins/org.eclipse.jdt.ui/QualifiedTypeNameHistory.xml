@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="javax.persistence.Lob"/>
+<fullyQualifiedTypeName name="javax.persistence.MapKey"/>
+<fullyQualifiedTypeName name="javax.persistence.ManyToMany"/>
+<fullyQualifiedTypeName name="javax.persistence.JoinTable"/>
+<fullyQualifiedTypeName name="org.hibernate.annotations.Entity"/>
+<fullyQualifiedTypeName name="javax.persistence.ElementCollection"/>
+<fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
+<fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
+<fullyQualifiedTypeName name="org.hibernate.annotations.LazyCollection"/>
+<fullyQualifiedTypeName name="org.hibernate.annotations.LazyCollectionOption"/>
+<fullyQualifiedTypeName name="javax.persistence.FetchType"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
+<fullyQualifiedTypeName name="beans.Precio"/>
+<fullyQualifiedTypeName name="daos.PrecioDAO"/>
+<fullyQualifiedTypeName name="daos.ProductoDAO"/>
+<fullyQualifiedTypeName name="daos.PedidoDAO"/>
+<fullyQualifiedTypeName name="daos.CategoriaDAO"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="service.ProductManager"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
+<fullyQualifiedTypeName name="org.springframework.ui.ModelMap"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="daos.MedidaDAO"/>
+<fullyQualifiedTypeName name="daos.EmpresaDAO"/>
+<fullyQualifiedTypeName name="beans.Empresa"/>
+<fullyQualifiedTypeName name="beans.Categoria"/>
+<fullyQualifiedTypeName name="beans.Producto"/>
+<fullyQualifiedTypeName name="beans.Medida"/>
+<fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
+<fullyQualifiedTypeName name="beans.Pedido"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+</qualifiedTypeNameHistroy>

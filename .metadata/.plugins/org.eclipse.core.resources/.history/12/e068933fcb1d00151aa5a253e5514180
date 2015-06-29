@@ -1,0 +1,16 @@
+package beans;
+
+import java.io.Serializable;
+import java.util.Map;
+
+public class User implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Empresa empresa;
+	private Map<String,String> datos = new HashMap<String,String>;
+	
+
+}

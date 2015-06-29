@@ -1,0 +1,19 @@
+package beans;
+
+import java.io.Serializable;
+import java.util.List;
+
+public class Categoria implements Serializable{
+	
+	private Long idCategoria;
+	private Categoria padre;
+	private List<Categoria> hijos;
+	private String nombre;
+	private byte[] imagen;
+	private String descripcion;
+	private boolean activo;
+	private List<Producto> productos;
+	
+	
+
+}

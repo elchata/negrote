@@ -1,0 +1,10 @@
+package implementaciones;
+
+@Repository(value = "categoriaModel")
+public class CategoriaDAOHibernateJPA extends GenericDAOHibernateJPA<Categoria>  implements CategoriaDAO {		
+	
+		public CategoriaDAOHibernateJPA() {
+			super(Categoria.class);
+		}
+
+}

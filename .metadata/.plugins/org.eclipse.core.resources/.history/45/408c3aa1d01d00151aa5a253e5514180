@@ -1,0 +1,20 @@
+package beans;
+
+import java.io.Serializable;
+
+public class Direccion implements Serializable {
+
+	private Long idDireccion;
+	private String calle;
+	private int numero;
+	private String piso;
+	private String dpto;
+	private String nombre;
+	private String apellido;
+	private String telefono;
+	private String celular;
+	private String otros;
+	private Ciudad ciudad;
+	
+	
+}

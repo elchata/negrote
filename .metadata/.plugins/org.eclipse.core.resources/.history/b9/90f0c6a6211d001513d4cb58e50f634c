@@ -1,0 +1,38 @@
+package beans;
+
+import java.sql.Date;
+
+public class Precio implements Serializable{
+
+	private Long idPrecio;
+	private Producto producto;
+	private double monto;
+	private Date fecha;
+	public Long getIdPrecio() {
+		return idPrecio;
+	}
+	public void setIdPrecio(Long idPrecio) {
+		this.idPrecio = idPrecio;
+	}
+	public Producto getProducto() {
+		return producto;
+	}
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+	public double getMonto() {
+		return monto;
+	}
+	public void setMonto(double monto) {
+		this.monto = monto;
+	}
+	public Date getFecha() {
+		return fecha;
+	}
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+	
+	
+	
+}
