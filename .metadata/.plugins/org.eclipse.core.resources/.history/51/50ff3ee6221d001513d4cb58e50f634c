@@ -1,9 +1,0 @@
-package beans;
-
-public class Pedido {
-	
-	private Long idPedido;
-	private double precioFinal;
-	private HashMap<Producto,int> productos;
-	
-}

@@ -1,9 +1,0 @@
-package beans;
-
-public class Medida {
-	
-	private Long idMedida;
-	private String nombre;
-	private String abreviasion;
-
-}

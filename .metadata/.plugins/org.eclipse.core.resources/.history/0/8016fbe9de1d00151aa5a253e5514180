@@ -1,7 +1,0 @@
-package daos;
- 
-import beans.Empresa;
-
-public interface ClienteDAO extends BaseGenericDAOS<Empresa>{
-
-}

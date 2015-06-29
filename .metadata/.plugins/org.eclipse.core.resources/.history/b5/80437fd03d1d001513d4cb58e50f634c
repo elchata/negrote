@@ -1,7 +1,0 @@
-package daos;
-
-import beans.Categoria;
-
-public interface ProductoDAO extends BaseGenericDAOS<Categoria>{
-
-}
