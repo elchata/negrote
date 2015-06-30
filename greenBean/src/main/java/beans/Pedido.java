@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
@@ -27,6 +28,7 @@ public class Pedido {
 	private double precioFinal;
 	private Map<Producto,Integer> productos = new HashMap<Producto, Integer>();
 	private User cliente;
+	private Estado estado;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -61,5 +63,15 @@ public class Pedido {
 	public void setCliente(User cliente) {
 		this.cliente = cliente;
 	}	
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinColumn(name = "idEstado")
+	public Estado getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
 	
 }

@@ -62,9 +62,4 @@ public abstract class User implements Serializable{
 	public void setDatos(Map<String, String> datos) {
 		this.datos = datos;
 	}
-	
-	
-	
-	
-
 }

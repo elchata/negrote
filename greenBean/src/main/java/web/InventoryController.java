@@ -12,25 +12,24 @@ import beans.Cliente;
 import beans.Empresa;
 import beans.Medida;
 import beans.Pedido;
-import beans.Producto;
-import service.ProductManager;
+import beans.Producto; 
+import service.ServiceManager;
 
 
 @Controller
 public class InventoryController {
     
     @Autowired
-    private ProductManager productManager;
+    private ServiceManager productManager;
     
-    public void setProductManager(ProductManager productManager) {
+    public void setProductManager(ServiceManager productManager) {
         this.productManager = productManager;
     }    
 
     @RequestMapping(value="/hello.htm")
     public String printHello(ModelMap model) {  
     	String now = (new Date()).toString();
-    	this.creaEmp();
-    	this.creaCli();
+    	this.creaPed();
         model.addAttribute("now", now);   
         return "hello";
     }
@@ -45,20 +44,28 @@ public class InventoryController {
     	this.productManager.guardarEmpresa(aux);
     }
     public void creaCat(){
-    	Categoria aux=new Categoria("Verduras y Hortalizas");
+    	Categoria aux=new Categoria("Liquidos");
     	this.productManager.guardarCategoria(aux);
     }
-    public void creaProd(){
+    public void creaProd1(){
     	Producto med = new Producto("Lechuga",100);
+    	med.setMedida(this.productManager.darMedida((long) 1));
+    	med.getCategorias().add(this.productManager.darCategoria((long) 1));
+    	this.productManager.guardarProducto(med);
+    }    
+    public void creaProd2(){
+    	Producto med = new Producto("Remolacha",20);
     	med.setMedida(this.productManager.darMedida((long) 1));
     	med.getCategorias().add(this.productManager.darCategoria((long) 1));
     	this.productManager.guardarProducto(med);
     }    
     public void creaPed(){
     	Pedido aux=new Pedido();
-    	aux.setPrecioFinal(400);
+    	aux.setPrecioFinal(270.80);
     	Producto pr = this.productManager.darProducto((long) 1);
-    	aux.getProductos().put(pr, 15);
+    	aux.getProductos().put(pr, 2);
+    	aux.getProductos().put(this.productManager.darProducto((long) 2), 8);
+    	aux.setCliente(this.productManager.darCliente((long) 1));
     	this.productManager.guardarPedido(aux);
     }
     public void creaCli(){
@@ -68,5 +75,7 @@ public class InventoryController {
     	aux.setEmpresa(this.productManager.darEmpresa((long) 1));
     	this.productManager.guardarCliente(aux);
     }
+    
+    
     //-----------------------------------------------//
 }
