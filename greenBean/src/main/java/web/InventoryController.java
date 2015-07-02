@@ -1,12 +1,23 @@
 package web;
 
-import java.util.Date; 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException; 
+import java.util.Date;  
+ 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import auxiliares.FotoForm;
 import beans.Categoria; 
 import beans.Cliente;
 import beans.Empresa;
@@ -27,11 +38,93 @@ public class InventoryController {
     }    
 
     @RequestMapping(value="/hello.htm")
-    public String printHello(ModelMap model) {  
+    public String printHello(ModelMap model) throws FileNotFoundException {  
     	String now = (new Date()).toString();
-    	this.creaPed();
+    	model.addAttribute("pedido",this.productManager.darPedido((long) 1));
         model.addAttribute("now", now);   
         return "hello";
+    }
+    
+    @RequestMapping(value="/verCateg.htm")
+    public String mostrarCategorias(ModelMap model) { 
+        model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
+        return "ABMcategorias";
+    }
+    @RequestMapping(value="verProducto.htm")
+    public String mostrarProd(ModelMap model) { 
+        model.addAttribute("producto",this.productManager.darProducto((long) 1));
+        return "verProd";
+    }
+    
+    @RequestMapping(value = "/nuevaCateg.htm", method = RequestMethod.GET)
+    public String nuevaCategorias(ModelMap model) { 
+    	model.addAttribute("command", new Categoria());
+        model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
+        return "editCategoria";
+    }
+    
+    @RequestMapping(value = "/nuevitaCat.htm", method = RequestMethod.POST)
+    public String creaCategoria(@ModelAttribute("command") Categoria cat, ModelMap model) { 
+    	if (cat.getIdCategoria() != 0) {
+    		Categoria papa = this.productManager.darCategoria(cat.getIdCategoria());
+    		cat.setPadre(papa);
+    	}
+    	cat.setIdCategoria(null);    	
+    	this.productManager.guardarCategoria(cat);
+        model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
+        return "ABMcategorias";
+    }
+    
+    @RequestMapping(value="/editarCat.htm")
+    public String verCategorias(HttpServletRequest req, ModelMap model) { 
+    	Long val = Long.parseLong(req.getParameter("idCat"));
+        model.addAttribute("categoria", this.productManager.darCategoria(val)); 
+        return "verCategoria";
+    }
+    
+    @RequestMapping(value="/subir.htm" , method = RequestMethod.POST)
+    public String subirFoto(@ModelAttribute("command") FotoForm foto, ModelMap model) throws FileNotFoundException { 
+    	File file = foto.getImagen();  	
+    	@SuppressWarnings("resource")
+		FileInputStream fis = new FileInputStream(file);
+        //create FileInputStream which obtains input bytes from a file in a file system
+        //FileInputStream is meant for reading streams of raw bytes such as image data. For reading streams of characters, consider using FileReader.
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
+        try {
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                //Writes to this byte array output stream
+                bos.write(buf, 0, readNum); 
+            }
+        } catch (IOException ex) {
+        }
+        byte[] bytes = bos.toByteArray();
+        Producto aux = this.productManager.darProducto((long) 1);
+        aux.setImagen(bytes);
+        this.productManager.guardarProducto(aux);
+        model.addAttribute("producto", aux); 	
+        return "verProd";
+    }
+    
+    @RequestMapping(value="/subirF.htm" , method = RequestMethod.GET)
+    public String subirFoto(ModelMap model) { 
+    	model.addAttribute("command", new FotoForm()); 	
+        return "subirImg";
+    }
+    
+    @RequestMapping(value="/eliminarCat.htm")
+    public String eliminarCategoria(HttpServletRequest req, ModelMap model) { 
+    	Long val = Long.parseLong(req.getParameter("idCat"));
+    	/* borra directamente buscando la entidad involucrada
+        	Categoria aux = this.productManager.darCategoria(val);    	
+    		this.productManager.borrarCategoria(aux); */
+    	
+    	// borra por medio de id
+    	this.productManager.borrarCategoria(val);
+    	
+        model.addAttribute("categorias", this.productManager.recuperarTodasCategorias()); 
+        return "ABMcategorias";
     }
     
     //metodos para crear objetos y testear la bbdd
@@ -76,6 +169,46 @@ public class InventoryController {
     	this.productManager.guardarCliente(aux);
     }
     
+    public void agregarFoto() throws FileNotFoundException{
+    	
+    File file = new File("/home/chata/foto.jpeg");    
+    FileInputStream fis = new FileInputStream(file);
+    //create FileInputStream which obtains input bytes from a file in a file system
+    //FileInputStream is meant for reading streams of raw bytes such as image data. For reading streams of characters, consider using FileReader.
+
+    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    byte[] buf = new byte[1024];
+    try {
+        for (int readNum; (readNum = fis.read(buf)) != -1;) {
+            //Writes to this byte array output stream
+            bos.write(buf, 0, readNum);  
+        }
+    } catch (IOException ex) {
+    }
+    byte[] bytes = bos.toByteArray();
+    Producto aux = this.productManager.darProducto((long) 1);
+    aux.setImagen(bytes);
+    this.productManager.guardarProducto(aux);
+	}
+    
     
     //-----------------------------------------------//
+    
+    //trae la imagen de la bbdd y se la devuelve convertida al view
+    @RequestMapping(value="/customer/mostrarimagen.htm", method = RequestMethod.GET)
+    public void verFoto (HttpServletRequest req, ModelMap model, HttpServletResponse res) throws IOException { 
+    	Long val = Long.parseLong(req.getParameter("id"));
+    	Producto producto = this.productManager.darProducto(val);
+    	
+    	byte[] imagen = producto.getImagen();
+    	 try {
+    		 res.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+    		 res.getOutputStream().write(imagen);
+    		 res.getOutputStream().close();
+    		 
+    	 } catch (Exception e) {
+    	        e.printStackTrace();
+    	 }
+    }
+    
 }

@@ -8,7 +8,7 @@
 	<persistence-unit name="conexion" transaction-type="RESOURCE_LOCAL">
 	<properties>
 		<property name="hibernate.default_schema" value="miguel"/>
-		<property name="hibernate.hbm2ddl.auto" value="create" />
+		<property name="hibernate.hbm2ddl.auto" value="update" />
 	</properties>
 	</persistence-unit>
 </persistence>

@@ -9,13 +9,17 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a href="<c:url value="verCateg.htm"/>">ABM categorias</a><br>
+<a href="<c:url value="verProducto.htm"/>">Mostrar Producto</a><br>
+<a href="<c:url value="subirF.htm"/>">Subir img</a><br>
 <c:out value="${now}"/><br>
-<c:out value="${pedido.precioFinal}"/><br>
+<h3>Pedido nuevo</h3>
+Precio final: $<c:out value="${pedido.precioFinal}"/><br>
 <c:forEach items="${pedido.productos}" var="hash" >
-	<c:out value="${hash.key.nombre}"/><br>
-	<c:out value="${hash.value}"/><br>
+	Producto: <c:out value="${hash.key.nombre}"/><br>
+	Cantidad: <c:out value="${hash.value}"/><c:out value="${hash.key.medida.abreviasion}"/><br>
 	<c:forEach items="${hash.key.categorias}" var="cat" >
-		<c:out value="${cat.nombre}"/><br>
+	Pertenece a la Categoria: <c:out value="${cat.nombre}"/><br>
 	</c:forEach>
 </c:forEach>
 </body>
