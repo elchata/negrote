@@ -4,9 +4,11 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -38,12 +40,12 @@ public class Producto implements Serializable{
 	private String nombre;
 	private Medida medida;
 	private byte[] imagen;
-	private List<Precio> precios= new ArrayList<Precio>(0);
+	private List<Precio> precios= new Stack<Precio>();
 	private int stock;
 	private String descripcion;
 	private boolean activo=true;
 	private Map<Cliente,Integer> visitas = new HashMap<Cliente,Integer>();
-
+	private List<Descuento> descuentos = new Stack<Descuento>();
 	private List<Categoria> categorias = new ArrayList<Categoria>(0);
 	
 	private List<Pedido> ventas = new ArrayList<Pedido>(0);
@@ -139,6 +141,10 @@ public class Producto implements Serializable{
 		this.precios = precios;
 	}	
 	
+	public void setPrecio(Precio precio){
+		this.precios.add(precio);
+	}
+	
 	public Producto(){
 		
 	}
@@ -156,5 +162,46 @@ public class Producto implements Serializable{
 	public void setVisitas(Map<Cliente,Integer> visitas) {
 		this.visitas = visitas;
 	}
+	
+	public double getPrecio(Date fecha){
+		int i = 0;
+		double monto;
+		while (this.precios.get(i).getFecha().before(fecha))
+			i++;
+		monto = this.precios.get(i).getMonto();
+		return monto - (monto * this.getDescuento(fecha) / 100);
+	}
+	
+	
+	public void setDescuento(Descuento descuento){
+		if (this.descuentos.get(0).getFechaFin() == null)
+			this.descuentos.get(0).setFechaFin(new Date());
+		this.descuentos.add(descuento);
+	}
 
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idProducto", referencedColumnName = "idProducto")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	public List<Descuento> getDescuentos() {
+		return descuentos;
+	}
+	
+	public void setDescuentos(List<Descuento> descuentos) {
+		this.descuentos = descuentos;
+	}
+	public int getDescuento(Date fecha){
+		int i = 0;
+		boolean ok = false;
+		boolean found = false;
+		while (!ok){
+			found = this.descuentos.get(i).getFechaInicio().after(fecha);
+			ok = found | this.descuentos.size() < i;
+			i++;
+		}
+		if (found)
+			if (this.descuentos.get(i-1).getFechaFin().after(fecha))
+				return this.descuentos.get(i-1).getPorcentaje();
+		return 0;
+	}
 }
