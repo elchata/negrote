@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -63,7 +64,8 @@ public abstract class Contenedor implements Serializable{
 	public Contenedor() {
 	}
 	
-	public double darPrecio(){
+	@Transient
+	public double getPrecio(){
 		double precio = 0.0;
 		for (Producto producto : this.productos.keySet())
 			precio += this.productos.get(producto) * producto.getPrecio(this.fecha);

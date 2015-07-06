@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -38,6 +39,20 @@ public class Categoria implements Serializable{
 	private String descripcion;
 	private boolean activo=true;
 	private List<Producto> productos = new ArrayList<Producto>(0);
+	
+	// auxiliar para enviar el idPadre al formulario, no se crea en la base de datos
+	@Transient
+	public Long aux;
+	@Transient
+	public Long getAux() {
+		return aux;
+	}
+	@Transient
+	public void setAux(Long aux) {
+		this.aux = aux;
+	}
+	
+	//--------------------------------------------------------------------------
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

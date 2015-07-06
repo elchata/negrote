@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "canasto")
@@ -55,8 +56,9 @@ public class Canasto extends Contenedor{
 		
 	}
 	
-	public double darPrecio(){
-		double precio = super.darPrecio();
+	@Transient
+	public double getPrecio(){
+		double precio = super.getPrecio();
 		return precio - (precio * descuento / 100);
 	}
 	
