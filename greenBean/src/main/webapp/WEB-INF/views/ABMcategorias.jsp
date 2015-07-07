@@ -19,13 +19,13 @@
 	  <tr>
 	    <td><c:out value="${cat.nombre}"/></td>
 	    <td><c:out value="${cat.padre.nombre}"/></td>
-	    <c:url value="/editarCat.htm" var="catURL2">
+	    <c:url value="./editar.htm" var="catURL2">
 			<c:param name="idCat" value="${cat.idCategoria}"/>
 		</c:url>
-		<c:url value="/eliminarCat.htm" var="catURL3">
+		<c:url value="./eliminar.htm" var="catURL3">
 			<c:param name="idCat" value="${cat.idCategoria}"/>
 		</c:url>
-		<c:url value="/verProdCat.htm" var="catURL4">
+		<c:url value="./verProd.htm" var="catURL4">
 			<c:param name="idCat" value="${cat.idCategoria}"/>
 		</c:url>
 		<td>
@@ -37,6 +37,6 @@
 	  </tr>
   </c:forEach>
 </table>
-<a href="nuevaCateg.htm" >Nueva Categoria </a>  
+<a href="./nueva.htm" >Nueva Categoria </a>  
 </body>
 </html>

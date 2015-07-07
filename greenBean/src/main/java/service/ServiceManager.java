@@ -1,6 +1,8 @@
 package service;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.List; 
 
@@ -46,6 +48,10 @@ public interface ServiceManager extends Serializable {
 
 	public void guardarCliente(Cliente aux);
 
-	public User darCliente(long l); 
+	public User darCliente(long l);
+
+	public byte[] subirFoto(File auxImagen) throws FileNotFoundException;
+
+	public void borrarProducto(Long val); 
 
 }

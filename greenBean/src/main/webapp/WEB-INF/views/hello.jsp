@@ -9,7 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="<c:url value="verCateg.htm"/>">ABM categorias</a><br>
+<a href="<c:url value="categoria/ver.htm"/>">ABM categorias</a><br>
+<a href="<c:url value="producto/ver.htm"/>">ABM productos</a><br>
 <a href="<c:url value="verProducto.htm"/>">Mostrar Producto</a><br>
 <a href="<c:url value="subirF.htm"/>">Subir img</a><br>
 <c:out value="${now}"/><br>

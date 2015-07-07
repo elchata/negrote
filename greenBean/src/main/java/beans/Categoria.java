@@ -2,6 +2,7 @@ package beans;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,13 +39,13 @@ public class Categoria implements Serializable{
 	private byte[] imagen=null;
 	private String descripcion;
 	private boolean activo=true;
-	private List<Producto> productos = new ArrayList<Producto>(0);
+	private List<Producto> productos = new ArrayList<Producto>(0); 
 	
 	// auxiliar para enviar el idPadre al formulario, no se crea en la base de datos
 	@Transient
-	public Long aux;
+	public Long aux=null ;
 	@Transient
-	public Long getAux() {
+	public Long getAux(){
 		return aux;
 	}
 	@Transient
@@ -52,6 +53,17 @@ public class Categoria implements Serializable{
 		this.aux = aux;
 	}
 	
+	@Transient
+	private File auxImagen=null;  
+	
+	@Transient
+	public File getAuxImagen() {
+		return auxImagen;
+	}
+	@Transient
+	public void setAuxImagen(File auxImagen) {
+		this.auxImagen = auxImagen;
+	}
 	//--------------------------------------------------------------------------
 	
 	@Id
@@ -124,5 +136,20 @@ public class Categoria implements Serializable{
 	public Categoria(){
 		
 	}
+	//----------------------------------------------
+	
+	public String toString(){
+		return this.getNombre();
+	} 
+	@Override
+	 public boolean equals (Object obj) {
 
+        if (obj instanceof Categoria) {
+            Categoria tmpCateg = (Categoria) obj;
+            if (this.getNombre().equals(tmpCateg.getNombre()) ) {
+                return true; } 
+            else { return false; }
+
+        }  else { return false; }
+    } // Cierre del método equals
 }

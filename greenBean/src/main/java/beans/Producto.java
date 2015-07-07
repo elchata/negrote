@@ -2,6 +2,7 @@ package beans;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +24,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -34,7 +36,7 @@ public class Producto implements Serializable{
 	
 	/**
 	 * 
-	 */
+	 */ 
 	private static final long serialVersionUID = 1L;
 	private Long idProducto;
 	private String nombre;
@@ -46,8 +48,7 @@ public class Producto implements Serializable{
 	private boolean activo=true;
 	private Map<Cliente,Integer> visitas = new HashMap<Cliente,Integer>();
 	private List<Descuento> descuentos = new Stack<Descuento>();
-	private List<Categoria> categorias = new ArrayList<Categoria>(0);
-	
+	private List<Categoria> categorias = new ArrayList<Categoria>(0);	
 	private List<Pedido> ventas = new ArrayList<Pedido>(0);
 	
 	@Id
@@ -204,4 +205,29 @@ public class Producto implements Serializable{
 				return this.descuentos.get(i-1).getPorcentaje();
 		return 0;
 	}
+	
+	@Transient
+	private File auxImagen;  
+	
+	@Transient
+	public File getAuxImagen() {
+		return auxImagen;
+	}
+	@Transient
+	public void setAuxImagen(File auxImagen) {
+		this.auxImagen = auxImagen;
+	}
+	
+	// para enviarle a los checkboxes de categorias
+	@Transient
+	private String[] categos;
+	@Transient
+	public String[] getCategos() {
+		return categos;
+	}
+	@Transient
+	public void setCategos(String[] categos) {
+		this.categos = categos;
+	}
+	
 }

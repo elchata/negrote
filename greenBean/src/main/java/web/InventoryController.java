@@ -43,47 +43,10 @@ public class InventoryController {
     	model.addAttribute("pedido",this.productManager.darPedido((long) 1));
         model.addAttribute("now", now);   
         return "hello";
-    }
-    
-    @RequestMapping(value="/verCateg.htm")
-    public String mostrarCategorias(ModelMap model) { 
-        model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
-        return "ABMcategorias";
-    }
-    @RequestMapping(value="verProducto.htm")
-    public String mostrarProd(ModelMap model) { 
-        model.addAttribute("producto",this.productManager.darProducto((long) 1));
-        return "verProd";
-    }
-    
-    @RequestMapping(value = "/nuevaCateg.htm", method = RequestMethod.GET)
-    public String nuevaCategorias(ModelMap model) { 
-    	model.addAttribute("command", new Categoria());
-        model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
-        return "editCategoria";
-    }
-    
-    @RequestMapping(value = "/nuevitaCat.htm", method = RequestMethod.POST)
-    public String creaCategoria(@ModelAttribute("command") Categoria cat, ModelMap model) { 
-    	if (cat.getIdCategoria() != 0) {
-    		Categoria papa = this.productManager.darCategoria(cat.getIdCategoria());
-    		cat.setPadre(papa);
-    	}
-    	cat.setIdCategoria(null);    	
-    	this.productManager.guardarCategoria(cat);
-        model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
-        return "ABMcategorias";
-    }
-    
-    @RequestMapping(value="/editarCat.htm")
-    public String verCategorias(HttpServletRequest req, ModelMap model) { 
-    	Long val = Long.parseLong(req.getParameter("idCat"));
-        model.addAttribute("categoria", this.productManager.darCategoria(val)); 
-        return "verCategoria";
-    }
-    
+    } 
+       
     @RequestMapping(value="/subir.htm" , method = RequestMethod.POST)
-    public String subirFoto(@ModelAttribute("command") FotoForm foto, ModelMap model) throws FileNotFoundException { 
+    public String subirFoto(@ModelAttribute("imagenAux") FotoForm foto, ModelMap model) throws FileNotFoundException { 
     	File file = foto.getImagen();  	
     	@SuppressWarnings("resource")
 		FileInputStream fis = new FileInputStream(file);
@@ -107,25 +70,11 @@ public class InventoryController {
         return "verProd";
     }
     
-    @RequestMapping(value="/subirF.htm" , method = RequestMethod.GET)
+    @RequestMapping(value="/subirF.htm")
     public String subirFoto(ModelMap model) { 
-    	model.addAttribute("command", new FotoForm()); 	
+    	model.addAttribute("imagenAux", new FotoForm()); 	
         return "subirImg";
-    }
-    
-    @RequestMapping(value="/eliminarCat.htm")
-    public String eliminarCategoria(HttpServletRequest req, ModelMap model) { 
-    	Long val = Long.parseLong(req.getParameter("idCat"));
-    	/* borra directamente buscando la entidad involucrada
-        	Categoria aux = this.productManager.darCategoria(val);    	
-    		this.productManager.borrarCategoria(aux); */
-    	
-    	// borra por medio de id
-    	this.productManager.borrarCategoria(val);
-    	
-        model.addAttribute("categorias", this.productManager.recuperarTodasCategorias()); 
-        return "ABMcategorias";
-    }
+    } 
     
     //metodos para crear objetos y testear la bbdd
     public void creaMed(){
