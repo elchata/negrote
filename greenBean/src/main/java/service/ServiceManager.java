@@ -52,6 +52,16 @@ public interface ServiceManager extends Serializable {
 
 	public byte[] subirFoto(File auxImagen) throws FileNotFoundException;
 
-	public void borrarProducto(Long val); 
+	public void borrarProducto(Long val);
+
+	public List<Medida> darMedidas();
+
+	public void borrarMedida(Long val);
+
+	public List<Cliente>  darClientes();
+
+	public void borrarCliente(Long val);
+
+	public void borrarPedido(Long val); 
 
 }

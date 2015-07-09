@@ -159,4 +159,33 @@ public class ImplementServiceManager implements ServiceManager {
 		productoModel.borrar(val);
 		
 	}
+
+	@Override
+	public List<Medida> darMedidas() {
+		// TODO Auto-generated method stub
+		return medidaModel.recuperarTodos();
+	}
+
+	@Override
+	public void borrarMedida(Long val) {
+		medidaModel.borrar(val);
+		
+	}
+
+	@Override
+	public List<Cliente> darClientes() {
+		// TODO Auto-generated method stub
+		return clienteModel.recuperarTodos();
+	}
+
+	@Override
+	public void borrarCliente(Long val) {
+		clienteModel.borrar(val);		
+	}
+
+	@Override
+	public void borrarPedido(Long val) {
+		pedidoModel.borrar(val);
+		
+	}
 }

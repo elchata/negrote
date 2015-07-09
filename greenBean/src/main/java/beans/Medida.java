@@ -21,7 +21,7 @@ public class Medida implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long idMedida;
 	private String nombre;
-	private String abreviasion;
+	private String abreviacion;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -38,18 +38,18 @@ public class Medida implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getAbreviasion() {
-		return abreviasion;
+	public String getAbreviacion() {
+		return abreviacion;
 	}
-	public void setAbreviasion(String abreviasion) {
-		this.abreviasion = abreviasion;
+	public void setAbreviacion(String abreviacion) {
+		this.abreviacion = abreviacion;
 	}
 	
 	public Medida(){		
 	}
 	
 	public Medida(String nom, String abr){
-		this.abreviasion=abr;
+		this.abreviacion=abr;
 		this.nombre=nom;
 	}
 	

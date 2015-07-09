@@ -8,7 +8,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.taglibs.standard.tag.rt.core.ForEachTag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,16 +32,19 @@ public class ProductoController {
     
     @RequestMapping(value="ver.htm")
 	public String mostrarProductos(ModelMap model) { 
-	    model.addAttribute("productos",this.productManager.darProductos());
-	    return "ABMproductos";
+	    model.addAttribute("productos",this.productManager.darProductos()); 
+	    model.addAttribute("vista","ABMproductos.jsp");
+	    return "frontend";
 	}
     
-    @RequestMapping(value = "nuevo.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "new.htm", method = RequestMethod.GET)
 	public String nuevoProducto(ModelMap model) { 
 		model.addAttribute("command", new Producto());
 		model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
-	    model.addAttribute("productos",this.productManager.darProductos());
-	    return "editarProducto";
+	    model.addAttribute("medidas",this.productManager.darMedidas());
+	    model.addAttribute("productos",this.productManager.darProductos()); 
+	    model.addAttribute("vista","editarProducto.jsp");
+	    return "frontend";
 	}
     
     @RequestMapping(value="editar.htm", method = RequestMethod.GET)
@@ -50,8 +52,10 @@ public class ProductoController {
 		Long val = Long.parseLong(req.getParameter("idProd"));
 	    model.addAttribute("productos",this.productManager.darProductos());
 	    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
-	    model.addAttribute("command", this.productManager.darProducto(val)); 
-	    return "editarProducto";
+	    model.addAttribute("medidas",this.productManager.darMedidas());
+	    model.addAttribute("command", this.productManager.darProducto(val));  
+	    model.addAttribute("vista","editarProducto.jsp");
+	    return "frontend";
 	}
 
     @RequestMapping(value="producto/mostrarimagen.htm", method = RequestMethod.GET)
@@ -74,8 +78,9 @@ public class ProductoController {
 	public String eliminarProducto(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idProd"));
 		this.productManager.borrarProducto(val);			
-	    model.addAttribute("productos", this.productManager.darProductos()); 
-	    return "ABMproductos";
+	    model.addAttribute("productos", this.productManager.darProductos());  
+	    model.addAttribute("vista","ABMproductos.jsp");
+	    return "frontend";
 	}
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
@@ -96,9 +101,19 @@ public class ProductoController {
 		}
 		prod.setCategorias(listaAuxiliar);
 		//-----------------------------------------------
-		
+
+		prod.setMedida(this.productManager.darMedida(prod.getAuxMed()));
 		this.productManager.guardarProducto(prod);
-	    model.addAttribute("productos",this.productManager.darProductos());
-	    return "ABMproductos";
+	    model.addAttribute("productos",this.productManager.darProductos()); 
+	    model.addAttribute("vista","ABMproductos.jsp");
+	    return "frontend";
+	}
+    
+    @RequestMapping(value="/mostrar.htm", method = RequestMethod.GET)
+	public String mostrarProducto(HttpServletRequest req, ModelMap model) { 
+		Long val = Long.parseLong(req.getParameter("idProd"));
+	    model.addAttribute("producto", this.productManager.darProducto(val)); 
+	    model.addAttribute("vista","verProducto.jsp");
+	    return "frontend";
 	}
 }

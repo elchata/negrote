@@ -3,14 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+ 
 		<h2>Datos Producto</h2>
 		<form:form method="POST" action="./create.htm" modelattribute="command">		
 			<table>
@@ -27,6 +20,25 @@
 				<tr>
 					<td>Activo: </td>
 					<td><form:checkbox path="activo" value="${command.activo}"/></td>
+				</tr>	
+				<tr>
+					<td>Medida: </td>
+					<td>
+					<form:select path="auxMed">
+						<form:option value="0" label="--- Select ---"/>
+					 		<c:forEach items="${medidas}" var="med">
+					  			<c:choose>
+		                    		<c:when test="${med.idMedida == command.medida.idMedida}">
+		                        		<form:option value="${med.idMedida}" selected="selected" label="${med.nombre}"/>
+		                    		</c:when>
+		                    		<c:otherwise>
+		                        		<form:option value="${med.idMedida}" label="${med.nombre}"/>
+		                    		</c:otherwise>
+		                		</c:choose>			
+					 		</c:forEach>
+					</form:select>
+					<a href="../medida/new.htm">Crear nueva medida</a>
+					</td>
 				</tr>	
 				<tr>
 					<td>Stock: </td>
@@ -60,6 +72,4 @@
 		</form:form>
 		<br>
 		
-<a href="./ver.htm">Ver Productos</a>
-</body>
-</html>
+<a href="./ver.htm">Ver Productos</a> 

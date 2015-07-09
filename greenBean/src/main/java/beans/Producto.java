@@ -33,10 +33,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Table(name = "producto")
 public class Producto implements Serializable{
-	
-	/**
-	 * 
-	 */ 
+ 
 	private static final long serialVersionUID = 1L;
 	private Long idProducto;
 	private String nombre;
@@ -228,6 +225,17 @@ public class Producto implements Serializable{
 	@Transient
 	public void setCategos(String[] categos) {
 		this.categos = categos;
+	}
+	
+	@Transient
+	private Long auxMed=null ;
+	@Transient
+	public Long getAuxMed(){
+		return auxMed;
+	}
+	@Transient
+	public void setAuxMed(Long auxMed) {
+		this.auxMed = auxMed;
 	}
 	
 }

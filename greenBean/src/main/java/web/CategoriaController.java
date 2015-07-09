@@ -30,14 +30,17 @@ public class CategoriaController {
 		@RequestMapping(value="/ver.htm")
 		public String mostrarCategorias(ModelMap model) { 
 		    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
-		    return "ABMcategorias";
+		    model.addAttribute("menu","menuAdmin.jsp");
+		    model.addAttribute("vista","ABMcategorias.jsp");
+		    return "frontend";
 		}
 		
-		@RequestMapping(value = "/nueva.htm", method = RequestMethod.GET)
+		@RequestMapping(value = "/new.htm", method = RequestMethod.GET)
 		public String nuevaCategorias(ModelMap model) { 
 			model.addAttribute("command", new Categoria());
-		    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
-		    return "editarCategoria";
+		    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias()); 
+		    model.addAttribute("vista","editarCategoria.jsp");
+		    return "frontend";
 		}
 		
 		@RequestMapping(value = "/create.htm", method = RequestMethod.POST)
@@ -53,24 +56,35 @@ public class CategoriaController {
 				else cat.setImagen(null);
 			}
 			this.productManager.guardarCategoria(cat);
-		    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
-		    return "ABMcategorias";
+		    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias()); 
+		    model.addAttribute("vista","ABMcategorias.jsp");
+		    return "frontend";
 		}
 		
 		@RequestMapping(value="/editar.htm", method = RequestMethod.GET)
 		public String verCategorias(HttpServletRequest req, ModelMap model) { 
 			Long val = Long.parseLong(req.getParameter("idCat"));
 		    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
-		    model.addAttribute("command", this.productManager.darCategoria(val)); 
-		    return "editarCategoria";
+		    model.addAttribute("command", this.productManager.darCategoria(val));  
+		    model.addAttribute("vista","editarCategoria.jsp");
+		    return "frontend";
 		}
 		
 		@RequestMapping(value="/eliminar.htm", method = RequestMethod.GET)
 		public String eliminarCategoria(HttpServletRequest req, ModelMap model) { 
 			Long val = Long.parseLong(req.getParameter("idCat"));
 			this.productManager.borrarCategoria(val);			
-		    model.addAttribute("categorias", this.productManager.recuperarTodasCategorias()); 
-		    return "ABMcategorias";
+		    model.addAttribute("categorias", this.productManager.recuperarTodasCategorias());  
+		    model.addAttribute("vista","ABMcategorias.jsp");
+		    return "frontend";
+		}
+		
+		@RequestMapping(value="/mostrar.htm", method = RequestMethod.GET)
+		public String mostrarCategoria(HttpServletRequest req, ModelMap model) { 
+			Long val = Long.parseLong(req.getParameter("idCat"));
+		    model.addAttribute("categoria", this.productManager.darCategoria(val));  
+		    model.addAttribute("vista","verCategoria.jsp");
+		    return "frontend";
 		}
 		
 		@RequestMapping(value="categoria/mostrarimagen.htm", method = RequestMethod.GET)

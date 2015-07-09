@@ -23,7 +23,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED) 
-@Table(name = "estado")
+@Table(name = "contenedor")
 public abstract class Contenedor implements Serializable{
 
 	private static final long serialVersionUID = 1L;

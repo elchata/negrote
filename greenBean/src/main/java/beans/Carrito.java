@@ -12,16 +12,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "carrito")
 public class Carrito extends Contenedor {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 */
-	private User cliente;
-	
+	private static final long serialVersionUID = 1L; 
+	private User cliente; 
 	
 	@ManyToOne
 	@JoinColumn(name = "idUser")
