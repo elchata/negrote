@@ -19,7 +19,13 @@
 					 <c:forEach items="${cliente.pedidos}" var="ped">
 						<td><a href="../pedido/mostrar.html?idPed=${ped.idPedido}">${ped.idPedido}</a></td>
 					</c:forEach>
-				</tr>	 
+				</tr>
+				<tr>
+					<td>Datos: </td>
+					 <c:forEach items="${cliente.datos}" var="dato">
+						<td>${dato.key} : ${dato.value}</td>
+					</c:forEach>
+				</tr> 
 			</table>
 		<br>
 		
