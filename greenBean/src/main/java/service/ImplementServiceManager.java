@@ -63,6 +63,9 @@ public class ImplementServiceManager implements ServiceManager {
     @Autowired
     private ProvinciaDAO provinciaModel;
     
+    @Autowired
+    private ProvinciaDAO provinciaModel;
+    
 	public List<Categoria> recuperarTodasCategorias() {
 		return categoriaModel.recuperarTodos();
 	}
@@ -205,6 +208,7 @@ public class ImplementServiceManager implements ServiceManager {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<Empresa> darEmpresas() {
 		// TODO Auto-generated method stub
 		return empresaModel.recuperarTodos();
@@ -246,6 +250,8 @@ public class ImplementServiceManager implements ServiceManager {
 	}
 
 	@Override
+=======
+>>>>>>> d5fd05378116bbfe132b15e9fc54ecad50742962
 	public List<Provincia> darProvincias() {
 		return provinciaModel.recuperarTodos();
 	}
@@ -263,5 +269,10 @@ public class ImplementServiceManager implements ServiceManager {
 	@Override
 	public void borrarProvincia(Long val) {
 		provinciaModel.borrar(val);
+<<<<<<< HEAD
 	} 
 }
+=======
+	}
+}
+>>>>>>> d5fd05378116bbfe132b15e9fc54ecad50742962
