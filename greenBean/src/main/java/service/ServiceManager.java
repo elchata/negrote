@@ -34,15 +34,12 @@ public interface ServiceManager extends Serializable {
 	public List<Cliente>  darClientes();
 	
 	public List<Medida> darMedidas();
-<<<<<<< HEAD
 
 	public List<Ciudad> darCiudades(); 
 
 	public List<Direccion> darDirecciones();
 	
 	public List<Empresa> darEmpresas();
-=======
->>>>>>> d5fd05378116bbfe132b15e9fc54ecad50742962
 	
 	/* Individuos */ 
 
@@ -52,25 +49,18 @@ public interface ServiceManager extends Serializable {
 
 	public Pedido darPedido(Long l);
 	
-<<<<<<< HEAD
     	public Categoria darCategoria(Long id);
-=======
-    public Categoria darCategoria(Long id);
->>>>>>> d5fd05378116bbfe132b15e9fc54ecad50742962
     
    	public Empresa darEmpresa(Long id);
     
 	public User darCliente(long l);
 	
 	public Provincia darProvincia(long l);
-<<<<<<< HEAD
 
 	public Ciudad darCiudad(long auxCiu);
 
 	public Direccion darDireccion(Long val);
 	
-=======
->>>>>>> d5fd05378116bbfe132b15e9fc54ecad50742962
     
 /* POST */
     
@@ -88,11 +78,8 @@ public interface ServiceManager extends Serializable {
 	
 	public void guardarProvincia(Provincia prov);
 
-<<<<<<< HEAD
 	public void guardarDireccion(Direccion dir);
 
-=======
->>>>>>> d5fd05378116bbfe132b15e9fc54ecad50742962
 /* DETELE */
 	
 	public void borrarProducto(Long val);
@@ -103,7 +90,6 @@ public interface ServiceManager extends Serializable {
 
 	public void borrarPedido(Long val); 
 	
-<<<<<<< HEAD
   	public void borrarCategoria (long idCat);
 	
 	public void borrarProvincia(Long val);
@@ -111,13 +97,6 @@ public interface ServiceManager extends Serializable {
     	public Categoria borrarCategoria (Categoria cat);
 
 	public void borrarDireccion(Long val);
-=======
-    public void borrarCategoria (long idCat);
-	
-	public void borrarProvincia(Long val);
-    
-    public Categoria borrarCategoria (Categoria cat);
->>>>>>> d5fd05378116bbfe132b15e9fc54ecad50742962
     
 /* AUX */
     

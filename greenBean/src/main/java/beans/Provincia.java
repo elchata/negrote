@@ -39,8 +39,6 @@ public class Provincia implements Serializable{
 		this.nombre = nombre;
 	}
 	
-	public Provincia(){
-		
-	}
+	
 
 }
