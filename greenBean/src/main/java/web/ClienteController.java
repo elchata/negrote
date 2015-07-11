@@ -36,14 +36,14 @@ public class ClienteController {
 	@RequestMapping(value = "/new.htm", method = RequestMethod.GET)
 	public String nuevoCliente(ModelMap model) { 
 		model.addAttribute("command", new Cliente());
-	    model.addAttribute("clientes",this.productManager.darClientes()); 
+		model.addAttribute("empresas", this.productManager.darEmpresas()); 
 	    model.addAttribute("vista","editarCliente.jsp");
 	    return "frontend";
 	}
 	
 	@RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaCliente(@ModelAttribute("command") Cliente cli, ModelMap model) throws FileNotFoundException { 
-		
+		cli.setEmpresa(this.productManager.darEmpresa(cli.getAuxEmp()));
 		this.productManager.guardarCliente(cli);
 	    model.addAttribute("clientes",this.productManager.darClientes()); 
 	    model.addAttribute("vista","ABMclientes.jsp");
@@ -53,8 +53,8 @@ public class ClienteController {
 	@RequestMapping(value="/editar.htm", method = RequestMethod.GET)
 	public String verClientes(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idCli"));
-	    model.addAttribute("clientes",this.productManager.darClientes());
 	    model.addAttribute("command", this.productManager.darCliente(val));  
+	    model.addAttribute("empresas", this.productManager.darEmpresas()); 
 	    model.addAttribute("vista","editarCliente.jsp");
 	    return "frontend";
 	}

@@ -17,7 +17,7 @@
 				<tr>
 					<td>Sus pedidos son: </td>
 					 <c:forEach items="${cliente.pedidos}" var="ped">
-						<td><a href="../pedido/mostrar.html?idPed=${ped.idPedido}">${ped.idPedido}</a></td>
+						<td><a href="../pedido/mostrar.htm?idPed=${ped.idPedido}">${ped.idPedido}</a></td>
 					</c:forEach>
 				</tr>
 				<tr>

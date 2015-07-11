@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 
@@ -107,5 +108,16 @@ public class Direccion implements Serializable {
 		this.ciudad = ciudad;
 	}
 	
+	//---------VAR AUXILIAR
+	@Transient
+	public long auxCiu;
+	@Transient
+	public long getAuxCiu() {
+		return auxCiu;
+	}
+	@Transient
+	public void setAuxCiu(long auxCiu) {
+		this.auxCiu = auxCiu;
+	}
 	
 }

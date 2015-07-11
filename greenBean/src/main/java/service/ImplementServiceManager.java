@@ -12,18 +12,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component; 
 
 import beans.Categoria;
+import beans.Ciudad;
 import beans.Cliente;
+import beans.Direccion;
 import beans.Empresa;
 import beans.Medida;
 import beans.Pedido;
 import beans.Producto; 
+import beans.Provincia;
 import beans.User;
 import daos.CategoriaDAO;
+import daos.CiudadDAO;
 import daos.ClienteDAO;
+import daos.DireccionDAO;
 import daos.EmpresaDAO;
 import daos.MedidaDAO;
 import daos.PedidoDAO;
 import daos.ProductoDAO; 
+import daos.ProvinciaDAO;
 
 @Component
 public class ImplementServiceManager implements ServiceManager {
@@ -32,6 +38,12 @@ public class ImplementServiceManager implements ServiceManager {
 
     @Autowired
     private ProductoDAO productoModel;
+    
+    @Autowired
+    private CiudadDAO ciudadModel;
+    
+    @Autowired
+    private DireccionDAO direccionModel;
     
     @Autowired
     private MedidaDAO medidaModel;
@@ -47,6 +59,9 @@ public class ImplementServiceManager implements ServiceManager {
   
     @Autowired
     private CategoriaDAO categoriaModel;
+
+    @Autowired
+    private ProvinciaDAO provinciaModel;
     
 	public List<Categoria> recuperarTodasCategorias() {
 		return categoriaModel.recuperarTodos();
@@ -188,4 +203,65 @@ public class ImplementServiceManager implements ServiceManager {
 		pedidoModel.borrar(val);
 		
 	}
+
+	@Override
+	public List<Empresa> darEmpresas() {
+		// TODO Auto-generated method stub
+		return empresaModel.recuperarTodos();
+	}
+
+	@Override
+	public List<Direccion> darDirecciones() {
+		// TODO Auto-generated method stub
+		return direccionModel.recuperarTodos();
+	}
+
+	@Override
+	public Direccion darDireccion(Long val) {
+		// TODO Auto-generated method stub
+		return direccionModel.retornarPorId(val);
+	}
+
+	@Override
+	public void borrarDireccion(Long val) {
+		direccionModel.borrar(val);		
+	}
+
+	@Override
+	public void guardarDireccion(Direccion dir) {
+		direccionModel.actualizar(dir);
+		
+	}
+
+	@Override
+	public Ciudad darCiudad(long id) {
+		// TODO Auto-generated method stub
+		return ciudadModel.retornarPorId(id);
+	}
+
+	@Override
+	public List<Ciudad> darCiudades() {
+		// TODO Auto-generated method stub
+		return ciudadModel.recuperarTodos();
+	}
+
+	@Override
+	public List<Provincia> darProvincias() {
+		return provinciaModel.recuperarTodos();
+	}
+
+	@Override
+	public Provincia darProvincia(long l) {
+		return provinciaModel.retornarPorId(l);
+	}
+
+	@Override
+	public void guardarProvincia(Provincia prov) {
+		provinciaModel.persistir(prov);
+	}
+
+	@Override
+	public void borrarProvincia(Long val) {
+		provinciaModel.borrar(val);
+	} 
 }

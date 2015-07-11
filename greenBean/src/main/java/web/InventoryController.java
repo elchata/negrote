@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import beans.Cliente;
 import beans.Empresa; 
 import beans.Pedido;
-import beans.Producto; 
-import beans.User;
+import beans.Producto;
 import service.ServiceManager;
 
 

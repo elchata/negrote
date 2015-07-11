@@ -8,11 +8,23 @@
 		<form:form method="POST" action="./create.htm" modelattribute="command">		
 			<table>
 				<tr>
-					<td>Logeado a travez de : </td>
-					<td><c:out value="${command.empresa.nombre}"/></td>
-				</tr>	 
-				 
-				<form:hidden path="idCliente"/>					 
+					<td>Logeado a travez de :  </td>
+					<td>
+					<form:select path="auxEmp">
+					 		<c:forEach items="${empresas}" var="emp" >
+					  			<c:choose>
+		                    		<c:when test="${emp.idEmpresa == command.empresa.idEmpresa}">
+		                        		<form:option value="${emp.idEmpresa}" selected="selected" label="${emp.nombre}" />
+		                    		</c:when>
+		                    		<c:otherwise>
+		                        		<form:option value="${emp.idEmpresa}" label="${emp.nombre}"/>
+		                    		</c:otherwise>
+		                		</c:choose>			
+					 		</c:forEach>
+					</form:select>
+					</td>					
+				</tr>				 
+				<form:hidden path="idUser"/>					 
 				<tr>
 					<td colspan="3"><input type="submit" value="Enviar Datos"/></td>
 				</tr>

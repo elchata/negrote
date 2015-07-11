@@ -24,8 +24,10 @@
 			<c:param name="idCli" value="${cli.idUser}"/>
 		</c:url>
 		<td>
+		<a href="${catURL2}">editar</a> /
 		<a href="${catURL4}">mostrar</a> /
 		<a href="${catURL3}">eliminar</a></td>
 	  </tr>
   </c:forEach>
 </table> 
+<a href="./new.htm" >Nuevo Cliente </a>
