@@ -12,56 +12,77 @@ import beans.Empresa;
 import beans.Medida;
 import beans.Pedido;
 import beans.Producto; 
+import beans.Provincia;
 import beans.User;
 
 public interface ServiceManager extends Serializable {
     
+/*	GET	*/
+	
+	/* Listas */
+	
     public List<Categoria> recuperarTodasCategorias();
     
     public List<Producto> darProductos();
     
     public List<Pedido> darPedidos();
     
-    public Categoria darCategoria(Long id);
-    
-    public Empresa darEmpresa(Long id);
-    
-    public void guardarCategoria(Categoria cat);
-    
-    public void guardarMedida(Medida medida);
-    
-    public void borrarCategoria (long idCat);
-    
-    public Categoria borrarCategoria (Categoria cat);
+    public List<Provincia> darProvincias();
 
-	public void guardarEmpresa(Empresa emp);
-
-	public void guardarProducto(Producto prod);
+	public List<Cliente>  darClientes();
+	
+	public List<Medida> darMedidas();
+	
+	/* Individuos */ 
 
 	public Medida darMedida(Long l);
 
 	public Producto darProducto(Long l);
 
+	public Pedido darPedido(Long l);
+	
+    public Categoria darCategoria(Long id);
+    
+    public Empresa darEmpresa(Long id);
+    
+	public User darCliente(long l);
+	
+	public Provincia darProvincia(long l);
+    
+/* POST */
+    
+    public void guardarCategoria(Categoria cat);
+    
+    public void guardarMedida(Medida medida);
+
+	public void guardarEmpresa(Empresa emp);
+
+	public void guardarProducto(Producto prod);
+	
 	public void guardarPedido(Pedido aux);
 
-	public Pedido darPedido(Long l);
-
 	public void guardarCliente(Cliente aux);
+	
+	public void guardarProvincia(Provincia prov);
 
-	public User darCliente(long l);
-
-	public byte[] subirFoto(File auxImagen) throws FileNotFoundException;
-
+/* DETELE */
+	
 	public void borrarProducto(Long val);
 
-	public List<Medida> darMedidas();
-
 	public void borrarMedida(Long val);
-
-	public List<Cliente>  darClientes();
 
 	public void borrarCliente(Long val);
 
 	public void borrarPedido(Long val); 
+	
+    public void borrarCategoria (long idCat);
+	
+	public void borrarProvincia(Long val);
+    
+    public Categoria borrarCategoria (Categoria cat);
+    
+/* AUX */
+    
+	public byte[] subirFoto(File auxImagen) throws FileNotFoundException;
 
 }
