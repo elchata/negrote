@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 
@@ -51,6 +52,21 @@ public class Partido implements Serializable{
 		this.provincia = provincia;
 	}
 	
+	@Transient
+	long auxProv;
+
+	@Transient
+	public long getAuxProv() {
+		return auxProv;
+	}
+	@Transient
+	public void setAuxProv(long auxProv) {
+		this.auxProv = auxProv;
+	}
+	
+	public Partido(){
+		
+	}
 	
 
 }

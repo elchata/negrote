@@ -12,6 +12,7 @@ import beans.Cliente;
 import beans.Direccion;
 import beans.Empresa;
 import beans.Medida;
+import beans.Partido;
 import beans.Pedido;
 import beans.Producto; 
 import beans.Provincia;
@@ -28,6 +29,8 @@ public interface ServiceManager extends Serializable {
     public List<Producto> darProductos();
     
     public List<Pedido> darPedidos();
+
+    public List<Partido> darPartidos();
     
     public List<Provincia> darProvincias();
 
@@ -61,6 +64,8 @@ public interface ServiceManager extends Serializable {
 
 	public Direccion darDireccion(Long val);
 	
+    public Partido darPartido(Long val);
+	
     
 /* POST */
     
@@ -80,6 +85,8 @@ public interface ServiceManager extends Serializable {
 
 	public void guardarDireccion(Direccion dir);
 
+    public void guardarPartido(Partido par);
+
 /* DETELE */
 	
 	public void borrarProducto(Long val);
@@ -97,6 +104,8 @@ public interface ServiceManager extends Serializable {
     	public Categoria borrarCategoria (Categoria cat);
 
 	public void borrarDireccion(Long val);
+	
+    public void borrarPartido(Long val);
     
 /* AUX */
     

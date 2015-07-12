@@ -17,6 +17,7 @@ import beans.Cliente;
 import beans.Direccion;
 import beans.Empresa;
 import beans.Medida;
+import beans.Partido;
 import beans.Pedido;
 import beans.Producto; 
 import beans.Provincia;
@@ -27,6 +28,7 @@ import daos.ClienteDAO;
 import daos.DireccionDAO;
 import daos.EmpresaDAO;
 import daos.MedidaDAO;
+import daos.PartidoDAO;
 import daos.PedidoDAO;
 import daos.ProductoDAO; 
 import daos.ProvinciaDAO;
@@ -62,6 +64,9 @@ public class ImplementServiceManager implements ServiceManager {
 
     @Autowired
     private ProvinciaDAO provinciaModel;
+    
+    @Autowired
+    private PartidoDAO partidoModel;
     
 	public List<Categoria> recuperarTodasCategorias() {
 		return categoriaModel.recuperarTodos();
@@ -263,5 +268,26 @@ public class ImplementServiceManager implements ServiceManager {
 	@Override
 	public void borrarProvincia(Long val) {
 		provinciaModel.borrar(val);
+	}
+
+	@Override
+	public List<Partido> darPartidos() {
+		return partidoModel.recuperarTodos();
+	}
+
+	@Override
+	public Partido darPartido(Long val) {
+		return partidoModel.retornarPorId(val);
+	}
+
+	@Override
+	public void guardarPartido(Partido par) {
+		partidoModel.persistir(par);
+		
+	}
+
+	@Override
+	public void borrarPartido(Long val) {
+		partidoModel.borrar(val);
 	} 
 }

@@ -12,4 +12,5 @@
 	<li><a href="<c:url value="/producto/ver.htm"/>">ABM productos</a></li>
 	<li><a href="<c:url value="/pedido/ver.htm"/>">ABM pedidos</a></li>
 	<li><a href="<c:url value="/provincia/ver.htm"/>">ABM provincia</a></li>
+	<li><a href="<c:url value="/partido/ver.htm"/>">ABM partido</a></li>
 </ul>
