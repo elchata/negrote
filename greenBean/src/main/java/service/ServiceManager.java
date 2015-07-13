@@ -44,6 +44,8 @@ public interface ServiceManager extends Serializable {
 	
 	public List<Empresa> darEmpresas();
 	
+	public List<Producto> darProductos(String nombre);
+	
 	/* Individuos */ 
 
 	public Medida darMedida(Long l);

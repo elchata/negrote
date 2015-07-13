@@ -76,5 +76,4 @@ public class DireccionController {
 	    model.addAttribute("vista","verDireccion.jsp");
 	    return "frontend";
 	}
-
 }

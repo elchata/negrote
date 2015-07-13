@@ -289,5 +289,11 @@ public class ImplementServiceManager implements ServiceManager {
 	@Override
 	public void borrarPartido(Long val) {
 		partidoModel.borrar(val);
+	}
+
+	@Override
+	public List<Producto> darProductos(String nombre) {
+		
+		return productoModel.retornarTodosNombre(nombre);
 	} 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import auxiliares.DatosFormulario;
 import beans.Categoria;
 import beans.Producto;
 import service.ServiceManager;
@@ -34,6 +35,24 @@ public class ProductoController {
 	public String mostrarProductos(ModelMap model) { 
 	    model.addAttribute("productos",this.productManager.darProductos()); 
 	    model.addAttribute("vista","ABMproductos.jsp");
+	    return "frontend";
+	}
+    
+    @RequestMapping(value="buscar.htm", method = RequestMethod.GET)
+	public String buscarProductos(ModelMap model) {  
+    	model.addAttribute("command", new DatosFormulario());
+	    model.addAttribute("vista","buscarProd.jsp");
+	    return "frontend";
+	}
+    
+    @RequestMapping(value="result.htm", method = RequestMethod.GET)
+	public String resultProductos(@ModelAttribute("command") DatosFormulario res,ModelMap model) {  
+    	List<Producto> prods = this.productManager.darProductos(res.getNombre());
+    	if ( prods.size() > 0 ) {
+    	model.addAttribute("productos", prods); 
+	    model.addAttribute("vista","ABMproductos.jsp");
+    	}
+    	else model.addAttribute("vista","errorBusqueda.jsp");
 	    return "frontend";
 	}
     
