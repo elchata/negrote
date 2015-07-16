@@ -38,6 +38,17 @@ public class PedidoController {
 	    return "frontend";
 	}
     
+    @RequestMapping(value = "miPedido.htm", method = RequestMethod.GET)
+	public String nuevoPedidoMio(HttpServletRequest req, ModelMap model) { 
+    	Long val = Long.parseLong(req.getParameter("idCli"));
+    	Pedido ped = new Pedido();
+    	ped.setCliente(this.productManager.darCliente(val));
+		model.addAttribute("command", ped);
+		model.addAttribute("pedidos",this.productManager.darPedidos()); 
+	    model.addAttribute("vista","editarPedido.jsp");
+	    return "frontend";
+	}
+    
     @RequestMapping(value="editar.htm", method = RequestMethod.GET)
 	public String verPedidos(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idPed"));
@@ -59,11 +70,12 @@ public class PedidoController {
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaPedido(@ModelAttribute("command") Pedido ped, ModelMap model) { 
+    	ped.setCliente(this.productManager.darCliente(ped.getAuxCli()));
     	this.productManager.guardarPedido(ped);
 	    model.addAttribute("pedidos",this.productManager.darPedidos()); 
 	    model.addAttribute("vista","ABMpedidos.jsp");
 	    return "frontend";
-	}
+	} 
     
     @RequestMapping(value="/mostrar.htm", method = RequestMethod.GET)
 	public String mostrarPedido(HttpServletRequest req, ModelMap model) { 

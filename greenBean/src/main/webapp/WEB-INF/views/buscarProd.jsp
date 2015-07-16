@@ -5,7 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
  
 <h2>Buscar Producto por Nombre</h2>
-		<form:form method="GET" action="./result.htm" modelattribute="command">		
+		<form:form method="POST" action="./result.htm" modelAttribute="find">		
 			<table>
 				<tr>
 					<td>Nombre:  </td> 

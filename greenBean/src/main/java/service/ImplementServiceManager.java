@@ -262,7 +262,7 @@ public class ImplementServiceManager implements ServiceManager {
 
 	@Override
 	public void guardarProvincia(Provincia prov) {
-		provinciaModel.persistir(prov);
+		provinciaModel.actualizar(prov);
 	}
 
 	@Override
@@ -282,7 +282,7 @@ public class ImplementServiceManager implements ServiceManager {
 
 	@Override
 	public void guardarPartido(Partido par) {
-		partidoModel.persistir(par);
+		partidoModel.actualizar(par);
 		
 	}
 

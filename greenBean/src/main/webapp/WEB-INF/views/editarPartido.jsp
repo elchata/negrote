@@ -10,7 +10,7 @@
 				<tr>
 					<td>Provincia:</td>
 					<td>
-					<form:select path="auxProv"> 
+					<form:select path="provincia.idProvincia"> 
 					 		<c:forEach items="${provincias}" var="prov">
 					  			<c:choose>
 		                    		<c:when test="${prov.idProvincia== command.provincia.idProvincia}">

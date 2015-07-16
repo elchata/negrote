@@ -1,27 +1,40 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
- 
-<h2>Provincias:</h2>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<script type="text/javascript">  
+	    function hacer_click() 
+	    { 
+	        alert("Me haz dado un click"); 
+	    }
+</script>
+
+<div style="width: 95%; margin: 0 auto;">
+
+	<div id="provDialog" style="display: none;">
+		<%@ include file="editarProvincia.jsp"%>
+	</div>
+	<h1>Lista de Provincias</h1>
+	<button class="pure-button pure-button-primary" onclick="addProv()">
+		<i class="fa fa-plus"></i> Crear Provincia
+	</button>
+	<br>
 <table border="1">
   <tr>
     <th>Nombre</th>
     <th>Acciones</th>
   </tr>
   <c:forEach items="${provincias}" var="prov">	
-	  <tr>
-	    <td><c:out value="${prov.nombre}"/></td>
-	    <c:url value="./editar.htm" var="catURL2">
-			<c:param name="idProv" value="${prov.idProvincia}"/>
-		</c:url>
-		<c:url value="./eliminar.htm" var="catURL3">
-			<c:param name="idProv" value="${prov.idProvincia}"/>
-		</c:url>
-		<td>
-			<a href="${catURL2}">editar</a> /
-			<a href="${catURL3}">eliminar</a>
-		</td>
-	  </tr>
+	  	<tr>
+		  	<td><c:out value="${prov.nombre}" /></td>
+		  	<td>
+			<button class="pure-button pure-button-primary" onclick="editarProv(${prov.idProvincia})">
+				<i class="fa fa-pencil"></i> Editar
+			</button>
+			<a class="pure-button pure-button-primary" onclick="return confirm('Seguro queres eliminar la Provincia?');"
+			href="./eliminar.htm?idProv=${prov.idProvincia}"> 
+				<i class="fa fa-times"></i>Borrar</a>
+			</td> 
+		</tr>
   </c:forEach>
-</table>
-<a href="./new.htm" >Nueva Provincia </a>   
+</table> 
+</div>

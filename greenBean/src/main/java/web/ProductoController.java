@@ -40,13 +40,13 @@ public class ProductoController {
     
     @RequestMapping(value="buscar.htm", method = RequestMethod.GET)
 	public String buscarProductos(ModelMap model) {  
-    	model.addAttribute("command", new DatosFormulario());
+    	model.addAttribute("find", new DatosFormulario());
 	    model.addAttribute("vista","buscarProd.jsp");
 	    return "frontend";
 	}
     
-    @RequestMapping(value="result.htm", method = RequestMethod.GET)
-	public String resultProductos(@ModelAttribute("command") DatosFormulario res,ModelMap model) {  
+    @RequestMapping(value="result.htm", method = RequestMethod.POST)
+	public String resultProductos(@ModelAttribute("find") DatosFormulario res,ModelMap model) {  
     	List<Producto> prods = this.productManager.darProductos(res.getNombre());
     	if ( prods.size() > 0 ) {
     	model.addAttribute("productos", prods); 
@@ -133,6 +133,14 @@ public class ProductoController {
 		Long val = Long.parseLong(req.getParameter("idProd"));
 	    model.addAttribute("producto", this.productManager.darProducto(val)); 
 	    model.addAttribute("vista","verProducto.jsp");
+	    return "frontend";
+	}
+    
+    @RequestMapping(value="listar.htm", method = RequestMethod.GET)
+	public String listarProductos(ModelMap model) {  
+	    model.addAttribute("productos",this.productManager.darProductos());
+	    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
+	    model.addAttribute("vista","listarProductos.jsp");
 	    return "frontend";
 	}
 }

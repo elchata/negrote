@@ -19,6 +19,7 @@
 					 <c:forEach items="${cliente.pedidos}" var="ped">
 						<td><a href="../pedido/mostrar.htm?idPed=${ped.idPedido}">${ped.idPedido}</a></td>
 					</c:forEach>
+					<td><a href="<c:url value="/pedido/miPedido.htm?idCli=${cliente.idUser}"/>">Agregar Nuevo Pedido</a></td>
 				</tr>
 				<tr>
 					<td>Datos: </td>
