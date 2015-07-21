@@ -13,7 +13,20 @@
 				</tr>
 				<tr>
 					<td>Realizado por el cliente : </td>
-					<td><form:input path="auxCli" value="${command.cliente.idUser}"/></td>
+					<td>
+					<form:select path="cliente.idCliente">
+						<c:forEach items="${clientes}" var="cli">
+					  			<c:choose>
+		                    		<c:when test="${cli.idCliente == command.cliente.idCliente}">
+		                        		<form:option value="${cli.idCliente}" selected="selected" label="${cli.nombre}"/>
+		                    		</c:when>
+		                    		<c:otherwise>
+		                        		<form:option value="${cli.idCliente}" label="${cli.nombre}"/>
+		                    		</c:otherwise>
+		                		</c:choose>			
+					 		</c:forEach>
+					</form:select> 
+					</td>
 				</tr>			 
 				 
 				<form:hidden path="idPedido"/>					 

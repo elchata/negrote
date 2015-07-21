@@ -29,6 +29,15 @@ public class Entregado extends Estado implements Serializable {
 	public void setEnviado(Enviado enviado) {
 		this.enviado = enviado;
 	}
+
+	public Entregado(Enviado enviado) {
+		super();
+		this.enviado = enviado;
+	}
+
+	public Entregado() {
+		super();
+	}
 	
 	
 

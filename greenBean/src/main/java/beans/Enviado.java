@@ -30,4 +30,15 @@ public class Enviado extends Estado implements Serializable{
 		this.preparado = preparado;
 	}
 
+	public Enviado(Preparado preparado) {
+		super();
+		this.preparado = preparado;
+	}
+
+	public Enviado() {
+		super();
+	}
+	
+	
+
 }

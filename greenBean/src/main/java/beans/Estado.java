@@ -39,6 +39,14 @@ public abstract class Estado implements Serializable {
 	}
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+	public Estado(Date fecha) {
+		super();
+		this.fecha = fecha;
 	}	
 
+	public Estado(){
+		
+	}
+	
 }

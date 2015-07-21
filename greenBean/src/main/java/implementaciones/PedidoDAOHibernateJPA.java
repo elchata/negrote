@@ -6,9 +6,9 @@ import daos.PedidoDAO;
 import beans.Pedido;
 
 @Repository(value = "pedidoModel")
-public class PedidaDAOHibernateJPA extends GenericDAOHibernateJPA<Pedido>  implements PedidoDAO {		
+public class PedidoDAOHibernateJPA extends GenericDAOHibernateJPA<Pedido>  implements PedidoDAO {		
 	
-		public PedidaDAOHibernateJPA() {
+		public PedidoDAOHibernateJPA() {
 			super(Pedido.class);
 		}
 

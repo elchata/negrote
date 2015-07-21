@@ -53,6 +53,8 @@ public class PedidoController {
 	public String verPedidos(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idPed"));
 	    model.addAttribute("pedidos",this.productManager.darPedidos()); 
+	    model.addAttribute("clientes", this.productManager.darClientes());
+	    model.addAttribute("productos", this.productManager.darProductos());
 	    model.addAttribute("command", this.productManager.darPedido(val));  
 	    model.addAttribute("vista","editarPedido.jsp");
 	    return "frontend";
@@ -70,7 +72,7 @@ public class PedidoController {
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaPedido(@ModelAttribute("command") Pedido ped, ModelMap model) { 
-    	ped.setCliente(this.productManager.darCliente(ped.getAuxCli()));
+    	ped.setCliente(this.productManager.darCliente(ped.getCliente().getIdUser()));
     	this.productManager.guardarPedido(ped);
 	    model.addAttribute("pedidos",this.productManager.darPedidos()); 
 	    model.addAttribute("vista","ABMpedidos.jsp");

@@ -43,8 +43,13 @@ public class Confirmado extends Estado implements Serializable {
 	public void setFechaEntrega(Date fechaEntrega) {
 		this.fechaEntrega = fechaEntrega;
 	}
-	
-	
+	public Confirmado() {
+		super();
+	}
+	public Confirmado(Nuevo nuevo) {
+		super(new Date());
+		this.nuevo = nuevo;
+	}
 	
 
 }

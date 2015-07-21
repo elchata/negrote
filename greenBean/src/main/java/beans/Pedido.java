@@ -15,8 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -75,17 +73,5 @@ public class Pedido {
 		this.estado = estado;
 	}
 	
-	// variable auxiliar para el formulario
-	
-	@Transient
-	public long auxCli;
-	@Transient
-	public long getAuxCli() {
-		return auxCli;
-	}
-	@Transient
-	public void setAuxCli(long auxCli) {
-		this.auxCli = auxCli;
-	}	
 	
 }
