@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,5 +36,13 @@ public class Preparado extends Estado implements Serializable{
 	public void setPaquetes(String[] paquetes) {
 		this.paquetes = paquetes;
 	}
+	public Preparado() {
+		super();
+	}
+	public Preparado(Confirmado confirmado) {
+		super(new Date());
+		this.confirmado = confirmado;
+	}
 
+	
 }

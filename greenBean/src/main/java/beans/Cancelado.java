@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,7 +36,16 @@ public class Cancelado extends Estado implements Serializable{
 	public void setMotivo(String motivo) {
 		this.motivo = motivo;
 	}
-
+	public Cancelado(Estado estado, String motivo) {
+		super(new Date());
+		this.estado = estado;
+		this.motivo = motivo;
+	}
+	public Cancelado() {
+		super();
+	}
 	
+	
+
 	
 }
