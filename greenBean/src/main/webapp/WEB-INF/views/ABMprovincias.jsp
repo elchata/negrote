@@ -1,12 +1,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-<script type="text/javascript">  
-	    function hacer_click() 
-	    { 
-	        alert("Me haz dado un click"); 
-	    }
-</script>
 
 <div style="width: 95%; margin: 0 auto;">
 

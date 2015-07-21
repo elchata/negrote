@@ -3,10 +3,12 @@ package web;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;  
+import java.util.List;  
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +17,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import auxiliares.DatosCompra;
 import auxiliares.DatosFormulario;
+import beans.Carrito;
 import beans.Categoria;
-import beans.Producto;
+import beans.Cliente;
+import beans.Producto; 
 import service.ServiceManager;
 
 @Controller
@@ -79,6 +84,7 @@ public class ProductoController {
 
     @RequestMapping(value="producto/mostrarimagen.htm", method = RequestMethod.GET)
     public void verFoto (HttpServletRequest req, ModelMap model, HttpServletResponse res) throws IOException { 
+    	if (!req.getParameter("id").equals("")){
     	Long val = Long.parseLong(req.getParameter("id"));
     	Producto producto = this.productManager.darProducto(val);
     	
@@ -91,6 +97,7 @@ public class ProductoController {
     	 } catch (Exception e) {
     	        e.printStackTrace();
     	 }
+    	}
     }
     
     @RequestMapping(value="/eliminar.htm", method = RequestMethod.GET)
@@ -128,19 +135,48 @@ public class ProductoController {
 	    return "frontend";
 	}
     
-    @RequestMapping(value="/mostrar.htm", method = RequestMethod.GET)
+    @RequestMapping(value="mostrar.htm", method = RequestMethod.GET)
 	public String mostrarProducto(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idProd"));
-	    model.addAttribute("producto", this.productManager.darProducto(val)); 
-	    model.addAttribute("vista","verProducto.jsp");
-	    return "frontend";
+	    model.addAttribute("producto", this.productManager.darProducto(val));
+	    model.addAttribute("compra", new DatosCompra());
+	    return "comprarProducto";
 	}
     
     @RequestMapping(value="listar.htm", method = RequestMethod.GET)
 	public String listarProductos(ModelMap model) {  
 	    model.addAttribute("productos",this.productManager.darProductos());
 	    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
+	    
+	    // bean con los datos de producto y cantidad que luego son agregados al hashmap
+	    
+	    model.addAttribute("compra",new DatosCompra());
+	    
+	    //---------------------
+	    
 	    model.addAttribute("vista","listarProductos.jsp");
 	    return "frontend";
 	}
+    
+    @RequestMapping(value="agregarCarro.htm", method = RequestMethod.POST)
+   	public String adicionarCompra(HttpSession session, @ModelAttribute("compra") DatosCompra compra, ModelMap model) {  
+    	Cliente aux = (Cliente) session.getAttribute("sesion");
+    	Producto prod = this.productManager.darProducto(compra.getIdProducto());
+    	Carrito carro = aux.getCarrito();
+    	carro.getProductos().put(prod, compra.getCantidad());
+    	carro.setFecha(new Date());
+    	this.productManager.guardarCarrito(carro);
+    	return "redirect:listar.htm";
+   	}
+    
+    @RequestMapping(value="quitar.htm", method = RequestMethod.GET)
+   	public String quitarCompra(HttpServletRequest req, HttpSession session, ModelMap model) {  
+    	Cliente aux = (Cliente) session.getAttribute("sesion");
+		Long val = Long.parseLong(req.getParameter("idKey"));
+    	Producto prod = this.productManager.darProducto(val);
+    	Carrito carro = aux.getCarrito();
+    	carro.getProductos().remove(prod);
+    	this.productManager.guardarCarrito(carro);
+    	return "redirect:listar.htm";
+   	}
 }

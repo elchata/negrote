@@ -1,14 +1,9 @@
-package beans;
+package beans; 
 
-import java.util.Date;
-import java.util.Map;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.Entity; 
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "canasto")
 public class Canasto extends Contenedor{
 	
 	/**
@@ -42,19 +37,7 @@ public class Canasto extends Contenedor{
 	}
 	public void setActivo(boolean activo) {
 		this.activo = activo;
-	}
-	public Canasto(Long id, Date fecha, Map<Producto, Integer> productos,
-			String nombre, byte[] imagen, int descuento, boolean activo) {
-		super(id, fecha, productos);
-		this.nombre = nombre;
-		this.imagen = imagen;
-		this.descuento = descuento;
-		this.activo = activo;
-	}
-	
-	public Canasto(){
-		
-	}
+	}  
 	
 	@Transient
 	public double getPrecio(){

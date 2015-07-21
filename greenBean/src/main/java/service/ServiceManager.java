@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.List; 
 
+import beans.Carrito;
 import beans.Categoria;
 import beans.Ciudad;
 import beans.Cliente;
@@ -54,7 +55,7 @@ public interface ServiceManager extends Serializable {
 
 	public Pedido darPedido(Long l);
 	
-    	public Categoria darCategoria(Long id);
+    public Categoria darCategoria(Long id);
     
    	public Empresa darEmpresa(Long id);
     
@@ -88,6 +89,8 @@ public interface ServiceManager extends Serializable {
 	public void guardarDireccion(Direccion dir);
 
     public void guardarPartido(Partido par);
+    
+    public void guardarCarrito(Carrito carrito);
 
 /* DETELE */
 	
@@ -103,7 +106,7 @@ public interface ServiceManager extends Serializable {
 	
 	public void borrarProvincia(Long val);
     
-    	public Categoria borrarCategoria (Categoria cat);
+    public Categoria borrarCategoria (Categoria cat);
 
 	public void borrarDireccion(Long val);
 	

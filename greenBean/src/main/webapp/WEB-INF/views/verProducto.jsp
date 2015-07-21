@@ -7,7 +7,7 @@
  		<h2>Datos Producto</h2>
 			<table>
 				<tr>
-					<td>Nombre de Producto : </td>
+					<td>Nombre : </td>
 					<td><c:out value="${producto.nombre}"/></td>
 				</tr>
 				<tr>
@@ -15,29 +15,13 @@
 					<td><c:out value="${producto.descripcion}"/></td>
 				</tr>
 				<tr>
-					<td>Activo: </td>
-					<td><c:out value="${producto.activo}"/></td>
-				</tr>	
+					<td>Stock : </td>
+					<td><c:out value="${producto.stock}"/> <c:out value="${producto.medida.nombre}" /></td>
+				</tr>
 				<tr>
-					<td>Medida: </td>
-					<td><c:out value="${producto.medida.nombre}" />
-					</td>
-				</tr>	
-				<tr>
-					<td>Stock: </td>
-					<td><c:out value="${producto.stock}"/></td>
-				</tr>	
-				<tr>
-					<td>Categorias a las que pertenece: </td> 
-						<td><c:forEach items="${producto.categorias}" var="cat">
-							* <c:out value="${cat.nombre}" />
-						</c:forEach> </td>
-				</tr>	
-				<tr>
-					<td>Imagen: </td>
 					<c:choose>
 			            <c:when test="${producto.imagen != null}">
-			               <td><img src="producto/mostrarimagen.htm?id=${producto.idProducto}" /></td>
+			               <td align="right"><img src="producto/mostrarimagen.htm?id=${producto.idProducto}" width="80%"/></td>
 			            </c:when>
 			            <c:otherwise>
 			                <td>No tiene imagen asignada</td>
@@ -47,5 +31,4 @@
 			</table>
 		<br>
 			
-<a href="./editar.htm?idProd=${producto.idProducto}">Editarlo</a><br>
-<a href="./ver.htm">Ver Productos</a> 
+<a href="./editar.htm?idProd=${producto.idProducto}">Editarlo</a><br> 

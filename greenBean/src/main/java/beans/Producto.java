@@ -238,4 +238,20 @@ public class Producto implements Serializable{
 		this.auxMed = auxMed;
 	}
 	
+	@Override
+	 public boolean equals (Object obj) {
+
+       if (obj instanceof Producto) {
+           Producto tmpProd = (Producto) obj;
+           if (this.getNombre().equals(tmpProd.getNombre()) ) {
+               return true; } 
+           else { return false; }
+
+       }  else { return false; }
+   } // Cierre del método equals 
+	
+	@Override
+	public int hashCode(){
+		return this.getIdProducto().intValue();
+	}
 }

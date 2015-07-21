@@ -1,18 +1,16 @@
-package beans;
+package beans; 
 
-import java.util.Date;
-import java.util.Map;
+import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.ManyToOne; 
 
-
-@Entity
-@Table(name = "carrito")
-public class Carrito extends Contenedor {
+@Entity 
+public class Carrito extends Contenedor implements Serializable{
+	
 	private static final long serialVersionUID = 1L; 
+	
 	private User cliente; 
 	
 	@ManyToOne
@@ -22,15 +20,5 @@ public class Carrito extends Contenedor {
 	}
 	public void setCliente(User cliente) {
 		this.cliente = cliente;
-	}
-
-	public Carrito(){		
-	}
-	
-	public Carrito(Long id, Date fecha, Map<Producto, Integer> productos,
-			User cliente) {
-		super(id, fecha, productos);
-		this.cliente = cliente;
-	}
-	
+	} 	
 }

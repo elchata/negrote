@@ -59,7 +59,7 @@ public class Cliente extends User implements Serializable {
 	}
 	
 	@ManyToOne
-	@JoinColumn(name = "idCarrito")
+	@JoinColumn(name = "idContenedor")
 	public Carrito getCarrito() {
 		return carrito;
 	}

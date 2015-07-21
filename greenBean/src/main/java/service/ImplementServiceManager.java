@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component; 
 
+import beans.Carrito;
 import beans.Categoria;
 import beans.Ciudad;
 import beans.Cliente;
@@ -22,6 +23,7 @@ import beans.Pedido;
 import beans.Producto; 
 import beans.Provincia;
 import beans.User;
+import daos.CarritoDAO;
 import daos.CategoriaDAO;
 import daos.CiudadDAO;
 import daos.ClienteDAO;
@@ -40,6 +42,9 @@ public class ImplementServiceManager implements ServiceManager {
 
     @Autowired
     private ProductoDAO productoModel;
+    
+    @Autowired
+    private CarritoDAO carritoModel;
     
     @Autowired
     private CiudadDAO ciudadModel;
@@ -295,5 +300,10 @@ public class ImplementServiceManager implements ServiceManager {
 	public List<Producto> darProductos(String nombre) {
 		
 		return productoModel.retornarTodosNombre(nombre);
+	}
+
+	@Override
+	public void guardarCarrito(Carrito carrito) {
+		carritoModel.actualizar(carrito);		
 	} 
 }

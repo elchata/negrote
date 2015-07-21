@@ -1,14 +1,18 @@
 package web; 
 
 import java.io.FileNotFoundException;  
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap; 
 import org.springframework.web.bind.annotation.RequestMapping; 
 
+import beans.Carrito;
 import beans.Cliente;
 import beans.Empresa; 
 import beans.Pedido;
@@ -27,7 +31,8 @@ public class InventoryController {
     }    
 
     @RequestMapping(value="/hello.htm")
-    public String printHello(ModelMap model) throws FileNotFoundException {  
+    public String printHello(ModelMap model, HttpSession session) throws FileNotFoundException {  
+    	this.iniciarSesion(session);
     	model.addAttribute("menu","menuAdmin.jsp");  
     	model.addAttribute("vista","hello.jsp"); 
         return "frontend";
@@ -39,6 +44,20 @@ public class InventoryController {
     	Empresa aux=new Empresa("Facebook");
     	this.productManager.guardarEmpresa(aux);
     }   
+    
+    public void iniciarSesion(HttpSession session){
+    	Cliente cli = (Cliente) this.productManager.darCliente(1);
+    	session.setAttribute("sesion", cli);
+    }
+    
+    @RequestMapping(value="/cerrarSesion.htm")
+    public String cerrarSesion(HttpSession session, ModelMap model){    	
+    	session.invalidate();
+    	model.addAttribute("menu","menuAdmin.jsp");  
+    	model.addAttribute("vista","hello.jsp"); 
+    	return "frontend";
+    }
+    
     public void creaPed(){
     	Pedido aux=new Pedido();
     	aux.setPrecioFinal(270.80);

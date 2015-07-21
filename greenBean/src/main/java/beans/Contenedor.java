@@ -27,18 +27,18 @@ import org.hibernate.annotations.LazyCollectionOption;
 public abstract class Contenedor implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private Long id;
+	private Long idContenedor;
 	private Date fecha;
 	private Map<Producto, Integer> productos = new HashMap<Producto, Integer>();
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Long getId() {
-		return id;
+	@Column(name = "idContenedor", unique = true, nullable = false)
+	public Long getIdContenedor() {
+		return idContenedor;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdContenedor(Long id) {
+		this.idContenedor = id;
 	}
 	public Date getFecha() {
 		return fecha;
@@ -54,15 +54,7 @@ public abstract class Contenedor implements Serializable{
 	}
 	public void setProductos(Map<Producto, Integer> productos) {
 		this.productos = productos;
-	}
-	public Contenedor(Long id, Date fecha, Map<Producto, Integer> productos) {
-		this.id = id;
-		this.fecha = fecha;
-		this.productos = productos;
-	}	
-	
-	public Contenedor() {
-	}
+	} 
 	
 	@Transient
 	public double getPrecio(){
