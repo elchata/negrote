@@ -34,6 +34,7 @@ public class Direccion implements Serializable {
 	private String celular;
 	private String otros;
 	private Ciudad ciudad;
+	private BandaHoraria horario;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -98,7 +99,14 @@ public class Direccion implements Serializable {
 	public void setOtros(String otros) {
 		this.otros = otros;
 	}
-	
+	@ManyToOne
+	@JoinColumn(name = "idBanda")
+	public BandaHoraria getHorario() {
+		return horario;
+	}
+	public void setHorario(BandaHoraria horario) {
+		this.horario = horario;
+	}
 	@ManyToOne
 	@JoinColumn(name = "idCiudad")
 	public Ciudad getCiudad() {

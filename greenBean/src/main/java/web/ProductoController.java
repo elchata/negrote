@@ -22,6 +22,7 @@ import auxiliares.DatosFormulario;
 import beans.Carrito;
 import beans.Categoria;
 import beans.Cliente;
+import beans.Precio;
 import beans.Producto; 
 import service.ServiceManager;
 
@@ -110,7 +111,7 @@ public class ProductoController {
 	}
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
-	public String creaCategoria(@ModelAttribute("command") Producto prod, ModelMap model) throws FileNotFoundException { 
+	public String crearProducto(@ModelAttribute("command") Producto prod, ModelMap model) throws FileNotFoundException { 
     	    
 		if (prod.getAuxImagen().exists() != false) prod.setImagen(this.productManager.subirFoto(prod.getAuxImagen()));
 		else {
@@ -127,7 +128,8 @@ public class ProductoController {
 		}
 		prod.setCategorias(listaAuxiliar);
 		//-----------------------------------------------
-
+		if ((prod.getPrecios().isEmpty()) || (prod.obtenerPrecio() != prod.getAuxMon()))
+			prod.agregarPrecio(new Precio(prod.getAuxMon()));
 		prod.setMedida(this.productManager.darMedida(prod.getAuxMed()));
 		this.productManager.guardarProducto(prod);
 	    model.addAttribute("productos",this.productManager.darProductos()); 

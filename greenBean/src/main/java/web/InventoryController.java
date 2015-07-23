@@ -1,7 +1,6 @@
 package web; 
 
 import java.io.FileNotFoundException;  
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap; 
 import org.springframework.web.bind.annotation.RequestMapping; 
 
-import beans.Carrito;
 import beans.Cliente;
 import beans.Empresa; 
 import beans.Pedido;

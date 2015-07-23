@@ -3,14 +3,12 @@ package beans;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,7 +20,6 @@ public class Precio implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long idPrecio;
-	private Producto producto;
 	private double monto;
 	private Date fecha;
 	
@@ -36,14 +33,6 @@ public class Precio implements Serializable{
 		this.idPrecio = idPrecio;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name = "idProducto")
-	public Producto getProducto() {
-		return producto;
-	}
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
 	public double getMonto() {
 		return monto;
 	}
@@ -55,6 +44,15 @@ public class Precio implements Serializable{
 	}
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+	public Precio(double monto) {
+		super();
+		this.monto = monto;
+		this.fecha = new Date();
 	}	
+	
+	public Precio(){
+		
+	}
 	
 }

@@ -26,6 +26,7 @@ public class Ciudad implements Serializable{
 	private String nombre;
 	private int codPost;
 	private Partido partido;
+	private double costoEnvio;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -57,7 +58,11 @@ public class Ciudad implements Serializable{
 	public void setPartido(Partido partido) {
 		this.partido = partido;
 	}
-	
-	
+	public double getCostoEnvio() {
+		return costoEnvio;
+	}
+	public void setCostoEnvio(double costoEnvio) {
+		this.costoEnvio = costoEnvio;
+	}
 
 }

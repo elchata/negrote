@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -130,7 +131,8 @@ public class Producto implements Serializable{
 		this.ventas = ventas;
 	}
 	
-	@OneToMany(mappedBy = "producto", fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
+	@JoinColumn(name = "idProducto", referencedColumnName = "idProducto")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	public List<Precio> getPrecios() {
 		return precios;
@@ -139,7 +141,7 @@ public class Producto implements Serializable{
 		this.precios = precios;
 	}	
 	
-	public void setPrecio(Precio precio){
+	public void agregarPrecio(Precio precio){
 		this.precios.add(precio);
 	}
 	
@@ -161,7 +163,7 @@ public class Producto implements Serializable{
 		this.visitas = visitas;
 	}
 	
-	public double getPrecio(Date fecha){
+	public double obtenerPrecio(Date fecha){
 		int i = 0;
 		double monto;
 		while (this.precios.get(i).getFecha().before(fecha))
@@ -170,6 +172,9 @@ public class Producto implements Serializable{
 		return monto - (monto * this.getDescuento(fecha) / 100);
 	}
 	
+	public double obtenerPrecio(){
+		return this.precios.get(0).getMonto();
+	}
 	
 	public void setDescuento(Descuento descuento){
 		if (this.descuentos.get(0).getFechaFin() == null)
@@ -236,6 +241,17 @@ public class Producto implements Serializable{
 	@Transient
 	public void setAuxMed(Long auxMed) {
 		this.auxMed = auxMed;
+	}
+	
+	@Transient
+	private Long auxMon=null ;
+	@Transient
+	public Long getAuxMon(){
+		return auxMon;
+	}
+	@Transient
+	public void setAuxMon(Long auxMon) {
+		this.auxMon = auxMon;
 	}
 	
 	@Override

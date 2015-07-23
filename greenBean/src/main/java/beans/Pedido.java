@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -71,6 +72,17 @@ public class Pedido {
 	}
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+	public Pedido(double precioFinal, Map<Producto, Integer> productos,
+			User cliente, Estado estado) {
+		super();
+		this.precioFinal = precioFinal;
+		this.productos = productos;
+		this.cliente = cliente;
+		this.estado = estado;
+	}
+	public Pedido() {
+		super();
 	}
 	
 	

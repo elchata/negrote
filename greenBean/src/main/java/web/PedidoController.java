@@ -1,6 +1,7 @@
 package web; 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import service.ServiceManager; 
+import beans.Carrito;
+import beans.Cliente;
+import beans.Nuevo;
 import beans.Pedido;
 
 @Controller
@@ -48,18 +52,6 @@ public class PedidoController {
 	    model.addAttribute("vista","editarPedido.jsp");
 	    return "frontend";
 	}
-    
-    @RequestMapping(value="editar.htm", method = RequestMethod.GET)
-	public String verPedidos(HttpServletRequest req, ModelMap model) { 
-		Long val = Long.parseLong(req.getParameter("idPed"));
-	    model.addAttribute("pedidos",this.productManager.darPedidos()); 
-	    model.addAttribute("clientes", this.productManager.darClientes());
-	    model.addAttribute("productos", this.productManager.darProductos());
-	    model.addAttribute("command", this.productManager.darPedido(val));  
-	    model.addAttribute("vista","editarPedido.jsp");
-	    return "frontend";
-	}
-    
 
     @RequestMapping(value="/eliminar.htm", method = RequestMethod.GET)
 	public String eliminarProducto(HttpServletRequest req, ModelMap model) { 
@@ -86,4 +78,14 @@ public class PedidoController {
 	    model.addAttribute("vista","verPedido.jsp");
 	    return "frontend";
 	}
+    
+    @RequestMapping(value="confirmarCompra.htm", method = RequestMethod.GET)
+    public String confirmarPedido(HttpServletRequest req, ModelMap model, HttpSession session){
+    	Cliente aux = (Cliente) session.getAttribute("sesion");
+		Carrito carro = aux.getCarrito();
+		Pedido nuevo = new Pedido(carro.getPrecio(), carro.getProductos(), aux, new Nuevo());
+		model.addAttribute("pedido", nuevo);
+		model.addAttribute("vista","editarPedido.jsp");
+    	return "frontend";
+    }
 }

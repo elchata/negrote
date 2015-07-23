@@ -15,7 +15,10 @@
 					<td>Descripcion : </td>
 					<td><form:textarea path="descripcion" rows="3" cols="30" value="${command.descripcion}"/></td>
 				</tr>			 
-				 
+				<tr>
+					<td>Precio : </td>
+					<td><form:input path="auxMon" value="${command.precios[0].monto}"/></td>
+				</tr>
 				<form:hidden path="idProducto"/>
 				<tr>
 					<td>Activo: </td>
