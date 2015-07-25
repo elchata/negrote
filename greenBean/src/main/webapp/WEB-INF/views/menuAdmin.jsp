@@ -16,5 +16,4 @@
 	<li><a href="<c:url value="/producto/buscar.htm"/>">Buscar producto x nombre</a></li>
 	<li><a href="<c:url value="/producto/listar.htm"/>">Listar Productos</a></li>
 	<li><a href="<c:url value="/bandas/listar.htm"/>">Listar Bandas Horarias</a></li>
-	<li><a href="<c:url value="/cerrarSesion.htm"/>">Cerrar Sesion</a></li>
 </ul>

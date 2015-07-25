@@ -11,6 +11,7 @@ import beans.Carrito;
 import beans.Categoria;
 import beans.Ciudad;
 import beans.Cliente;
+import beans.Contenedor;
 import beans.Direccion;
 import beans.Empresa;
 import beans.Medida;
@@ -64,7 +65,9 @@ public interface ServiceManager extends Serializable {
     
 	public User darCliente(long l);
 	
-	public Provincia darProvincia(long l);
+	public Provincia darProvincia(long l);	
+
+	public User darUser(long id);
 
 	public Ciudad darCiudad(long auxCiu);
 
@@ -86,7 +89,9 @@ public interface ServiceManager extends Serializable {
 	
 	public void guardarPedido(Pedido aux);
 
-	public void guardarCliente(Cliente aux);
+	public Cliente guardarCliente(Cliente aux);
+	
+	public Contenedor guardarContenedor(Contenedor aux);
 	
 	public void guardarProvincia(Provincia prov);
 
@@ -123,6 +128,9 @@ public interface ServiceManager extends Serializable {
 /* AUX */
     
 	public byte[] subirFoto(File auxImagen) throws FileNotFoundException;
+	
+	public long existeUser(String id);
+
 
 
 }

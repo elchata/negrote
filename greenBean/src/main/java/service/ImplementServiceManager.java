@@ -16,6 +16,7 @@ import beans.Carrito;
 import beans.Categoria;
 import beans.Ciudad;
 import beans.Cliente;
+import beans.Contenedor;
 import beans.Direccion;
 import beans.Empresa;
 import beans.Medida;
@@ -29,6 +30,7 @@ import daos.CarritoDAO;
 import daos.CategoriaDAO;
 import daos.CiudadDAO;
 import daos.ClienteDAO;
+import daos.ContenedorDAO;
 import daos.DireccionDAO;
 import daos.EmpresaDAO;
 import daos.MedidaDAO;
@@ -36,6 +38,7 @@ import daos.PartidoDAO;
 import daos.PedidoDAO;
 import daos.ProductoDAO; 
 import daos.ProvinciaDAO;
+import daos.UserDAO;
 
 @Component
 public class ImplementServiceManager implements ServiceManager {
@@ -44,6 +47,9 @@ public class ImplementServiceManager implements ServiceManager {
 
     @Autowired
     private ProductoDAO productoModel;
+    
+    @Autowired
+    private ContenedorDAO contenedorModel;
     
     @Autowired
     private CarritoDAO carritoModel;
@@ -68,6 +74,9 @@ public class ImplementServiceManager implements ServiceManager {
   
     @Autowired
     private CategoriaDAO categoriaModel;
+    
+    @Autowired
+    private UserDAO userModel;
 
     @Autowired
     private ProvinciaDAO provinciaModel;
@@ -258,8 +267,8 @@ public class ImplementServiceManager implements ServiceManager {
 	
 
 	@Override
-	public void guardarCliente(Cliente aux) {
-		this.clienteModel.actualizar(aux);
+	public Cliente guardarCliente(Cliente aux) {
+		return this.clienteModel.actualizar(aux);
 		
 	}
 	
@@ -360,6 +369,12 @@ public class ImplementServiceManager implements ServiceManager {
 	public BandaHoraria darBanda(Long val) {
 		return bandaHorariaModel.retornarPorId(val);
 	}
+
+	@Override
+	public Contenedor guardarContenedor(Contenedor aux) {
+		// TODO Auto-generated method stub
+		return contenedorModel.actualizar(aux);
+	}
 	
 	/*
 	 * (non-Javadoc)
@@ -380,4 +395,17 @@ public class ImplementServiceManager implements ServiceManager {
         byte[] bytes = bos.toByteArray(); 
         return bytes;
     }
+
+
+	@Override
+	public long existeUser(String id) { 
+		return userModel.retornarPorIdFacebook(id);
+	}
+
+
+	@Override
+	public User darUser(long id) { 
+		return userModel.retornarPorId(id);
+	}
+
 }

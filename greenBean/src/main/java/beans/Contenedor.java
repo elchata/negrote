@@ -24,7 +24,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED) 
 @Table(name = "contenedor")
-public abstract class Contenedor implements Serializable{
+public class Contenedor implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Long idContenedor;
@@ -60,7 +60,7 @@ public abstract class Contenedor implements Serializable{
 	public double getPrecio(){
 		double precio = 0.0;
 		for (Producto producto : this.productos.keySet())
-			precio += this.productos.get(producto) * producto.getPrecio(this.fecha);
+			precio += this.productos.get(producto) * producto.obtenerPrecio(this.fecha);
 		return precio;
 	}
 }

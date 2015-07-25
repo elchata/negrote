@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
- 
+
 import javax.persistence.ElementCollection; 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;  
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany; 
 import javax.persistence.OneToMany; 
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -25,7 +25,7 @@ public class Cliente extends User implements Serializable {
 	private List<Direccion> direcciones = new ArrayList<Direccion>(0);
 	private Map<Producto, Integer> visitas = new HashMap<Producto, Integer>();
 	private List<Pedido> pedidos = new ArrayList<Pedido>(0);
-	private Carrito carrito;
+	private Contenedor carrito;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -58,12 +58,12 @@ public class Cliente extends User implements Serializable {
 		this.pedidos = pedidos;
 	}
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "idContenedor")
-	public Carrito getCarrito() {
+	public Contenedor getCarrito() {
 		return carrito;
 	}
-	public void setCarrito(Carrito carrito) {
+	public void setCarrito(Contenedor carrito) {
 		this.carrito = carrito;
 	}
 	

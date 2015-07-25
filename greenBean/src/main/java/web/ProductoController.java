@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import auxiliares.DatosCompra;
-import auxiliares.DatosFormulario;
-import beans.Carrito;
+import auxiliares.DatosFormulario; 
 import beans.Categoria;
 import beans.Cliente;
+import beans.Contenedor;
 import beans.Precio;
 import beans.Producto; 
 import service.ServiceManager;
@@ -164,10 +164,10 @@ public class ProductoController {
    	public String adicionarCompra(HttpSession session, @ModelAttribute("compra") DatosCompra compra, ModelMap model) {  
     	Cliente aux = (Cliente) session.getAttribute("sesion");
     	Producto prod = this.productManager.darProducto(compra.getIdProducto());
-    	Carrito carro = aux.getCarrito();
+    	Contenedor carro = aux.getCarrito();
     	carro.getProductos().put(prod, compra.getCantidad());
     	carro.setFecha(new Date());
-    	this.productManager.guardarCarrito(carro);
+    	this.productManager.guardarContenedor(carro);
     	return "redirect:listar.htm";
    	}
     
@@ -176,9 +176,9 @@ public class ProductoController {
     	Cliente aux = (Cliente) session.getAttribute("sesion");
 		Long val = Long.parseLong(req.getParameter("idKey"));
     	Producto prod = this.productManager.darProducto(val);
-    	Carrito carro = aux.getCarrito();
+    	Contenedor carro = aux.getCarrito();
     	carro.getProductos().remove(prod);
-    	this.productManager.guardarCarrito(carro);
+    	this.productManager.guardarContenedor(carro);
     	return "redirect:listar.htm";
    	}
 }

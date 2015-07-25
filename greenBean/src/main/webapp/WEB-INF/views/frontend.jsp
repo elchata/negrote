@@ -25,7 +25,16 @@
 <nav>
 	<jsp:include page="menuAdmin.jsp" />
 </nav>
-<div id="sesion">Id de Usuario: ${sesion.idUser}</div>
+<c:choose >
+	<c:when test="${sesion == null}">
+		<div id="logg">
+			<a href="<c:url value="/login.htm"/>">Iniciar Sesion</a>
+		</div>
+	</c:when>
+	<c:otherwise>
+		<div id="sesion">Id de Usuario: ${sesion.idUser}<a href=" <c:url value="/cerrarSesion.htm"/>">Cerrar Sesion</a></div>
+	</c:otherwise>
+</c:choose>  
 <div id="cuerpo" style="width: 70%; float: left;">
 	<jsp:include page="${vista}" />
 </div> 
@@ -37,7 +46,7 @@
 		<c:out value="${prod.key.nombre}" />
 		<c:out value="${prod.value}" />	
 		<c:out value="${prod.key.medida.abreviacion}" />	 
-		<c:set var="tot" value="${prod.key.precios.get(0).monto + tot}" />
+		<c:set var="tot" value="${prod.key.precios.get(0).monto * prod.value + tot}" />
 		<a href="<c:url value="/producto/quitar.htm?idKey=${prod.key.idProducto}"/>">Quitar</a>
 	</c:forEach>
 	<h4>Total: $<c:out value="${tot}" /></h4>

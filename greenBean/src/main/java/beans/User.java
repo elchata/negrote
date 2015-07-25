@@ -34,8 +34,8 @@ public abstract class User implements Serializable{
 	private Long idUser;
 	private Empresa empresa;
 	private Map<String,String> datos = new HashMap<String,String>();
-	
-	
+	private String idFacebook;
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "idUser", unique = true, nullable = false)
@@ -62,6 +62,13 @@ public abstract class User implements Serializable{
 	}
 	public void setDatos(Map<String, String> datos) {
 		this.datos = datos;
+	}
+	
+	public String getIdFacebook() {
+		return idFacebook;
+	}
+	public void setIdFacebook(String idFacebook) {
+		this.idFacebook = idFacebook;
 	}
 	
 	//--------------VARIABLES AUXILIARES PARA QUE USE EL FORMULARIO

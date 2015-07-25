@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import service.ServiceManager; 
-import beans.Carrito;
+import service.ServiceManager;  
 import beans.Cliente;
+import beans.Contenedor;
 import beans.Nuevo;
 import beans.Pedido;
 
@@ -82,7 +82,7 @@ public class PedidoController {
     @RequestMapping(value="confirmarCompra.htm", method = RequestMethod.GET)
     public String confirmarPedido(HttpServletRequest req, ModelMap model, HttpSession session){
     	Cliente aux = (Cliente) session.getAttribute("sesion");
-		Carrito carro = aux.getCarrito();
+		Contenedor carro = aux.getCarrito();
 		Pedido nuevo = new Pedido(carro.getPrecio(), carro.getProductos(), aux, new Nuevo());
 		model.addAttribute("pedido", nuevo);
 		model.addAttribute("vista","editarPedido.jsp");
