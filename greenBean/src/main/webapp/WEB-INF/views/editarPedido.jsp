@@ -8,28 +8,26 @@
 		<form:form method="POST" action="./create.htm" modelattribute="command">		
 			<table>
 				<tr>
-					<td>Precio Final pedido : </td>
+					<td>Precio Total productos : </td>
 					<td><form:input path="precioFinal" value="${command.precioFinal}"/></td>
 				</tr>
-				<tr>
-					<td>Realizado por el cliente : </td>
-					<td>
-					<form:select path="cliente.idCliente">
-						<c:forEach items="${clientes}" var="cli">
-					  			<c:choose>
-		                    		<c:when test="${cli.idCliente == command.cliente.idCliente}">
-		                        		<form:option value="${cli.idCliente}" selected="selected" label="${cli.nombre}"/>
-		                    		</c:when>
-		                    		<c:otherwise>
-		                        		<form:option value="${cli.idCliente}" label="${cli.nombre}"/>
-		                    		</c:otherwise>
-		                		</c:choose>			
-					 		</c:forEach>
-					</form:select> 
-					</td>
-				</tr>			 
+				
 				 
-				<form:hidden path="idPedido"/>					 
+				<form:hidden path="idPedido"/>		
+				<tr>
+					<td>Direccion : </td>
+					<c:forEach items="${command.cliente.direcciones}" var="dir">
+								<c:choose>
+		                    		<c:when test="${command.cliente.direcciones.contains(dir)}"> 
+		                        		<form:checkbox path="direccion" label="${dir.calle} ${dir.ciudad} ${dir.ciudad.partido }" value="${dir.idDireccion}" checked="checked"/> 
+		                    		</c:when>
+		                    		<c:otherwise> 
+		                        		<form:checkbox path="direccion" label="${dir.calle} ${dir.ciudad} ${dir.ciudad.partido }" value="${dir.idDireccion}"/>
+		                    		</c:otherwise>
+		                		</c:choose>	
+					</c:forEach>
+				</tr>	
+				<form:textarea path="estado.detalle" rows="5" cols="30" />		 
 				<tr>
 					<td colspan="3"><input type="submit" value="Enviar Datos"/></td>
 				</tr>

@@ -46,6 +46,7 @@ public class DireccionController {
 	    model.addAttribute("direcciones",this.productManager.darDirecciones()); 
 	    model.addAttribute("command", this.productManager.darDireccion(val)); 
 	    model.addAttribute("ciudades",this.productManager.darCiudades()); 
+	    model.addAttribute("bandas", this.productManager.darBandas());
 	    model.addAttribute("vista","editarDireccion.jsp");
 	    return "frontend";
 	}
