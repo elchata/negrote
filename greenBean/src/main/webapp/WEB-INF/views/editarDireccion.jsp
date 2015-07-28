@@ -57,16 +57,16 @@
 				</tr>
 				
 				<tr>
-					<td>Provincia:</td>
+					<td>Banda horaria:</td>
 					<td>
-					<form:select path="horario.idBandaHoraria"> 
+					<form:select path="horario.idBanda"> 
 					 		<c:forEach items="${bandas}" var="banda">
 					  			<c:choose>
-		                    		<c:when test="${banda.idBandaHoraria== command.horario.idBandaHoraria}">
-		                        		<form:option value="${banda.idBandaHoraria}" selected="selected" label="${banda.horaInicio} - ${banda.horaFin}"/>
+		                    		<c:when test="${banda.idBanda== command.horario.idBanda}">
+		                        		<form:option value="${banda.idBanda}" selected="selected" label="${banda.horaInicio} - ${banda.horaFin}"/>
 		                    		</c:when>
 		                    		<c:otherwise>
-		                        		<form:option value="${banda.idBandaHoraria}" label="${banda.horaInicio} - ${banda.horaFin}"/>
+		                        		<form:option value="${banda.idBanda}" label="${banda.horaInicio} - ${banda.horaFin}"/>
 		                    		</c:otherwise>
 		                		</c:choose>			
 					 		</c:forEach>
