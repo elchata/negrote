@@ -166,7 +166,7 @@ public class Producto implements Serializable{
 	public double obtenerPrecio(Date fecha){
 		int i = 0;
 		double monto;
-		while (this.precios.get(i).getFecha().before(fecha))
+		while (!this.precios.get(i).getFecha().before(fecha))
 			i++;
 		monto = this.precios.get(i).getMonto();
 		return monto - (monto * this.getDescuento(fecha) / 100);
@@ -197,9 +197,9 @@ public class Producto implements Serializable{
 		int i = 0;
 		boolean ok = false;
 		boolean found = false;
-		while (!ok){
+		while (!ok && (this.descuentos.size() > 0)){
 			found = this.descuentos.get(i).getFechaInicio().after(fecha);
-			ok = found | this.descuentos.size() < i;
+			ok = found | this.descuentos.size() == i+1;
 			i++;
 		}
 		if (found)

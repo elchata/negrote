@@ -129,7 +129,7 @@ public interface ServiceManager extends Serializable {
     
 	public byte[] subirFoto(File auxImagen) throws FileNotFoundException;
 	
-	public long existeUser(String id);
+	public Long existeUser(String id);
 
 
 

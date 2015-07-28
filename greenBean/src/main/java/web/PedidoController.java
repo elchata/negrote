@@ -84,7 +84,7 @@ public class PedidoController {
     	Cliente aux = (Cliente) session.getAttribute("sesion");
 		Contenedor carro = aux.getCarrito();
 		Pedido nuevo = new Pedido(carro.getPrecio(), carro.getProductos(), aux, new Nuevo());
-		model.addAttribute("pedido", nuevo);
+		model.addAttribute("command", nuevo);
 		model.addAttribute("vista","editarPedido.jsp");
     	return "frontend";
     }

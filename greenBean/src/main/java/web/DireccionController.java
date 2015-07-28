@@ -1,6 +1,7 @@
 package web;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import service.ServiceManager;
+import beans.Cliente;
 import beans.Direccion; 
 
 @Controller
@@ -36,6 +38,7 @@ public class DireccionController {
 		model.addAttribute("command", new Direccion());
 		model.addAttribute("direcciones",this.productManager.darDirecciones()); 
 	    model.addAttribute("ciudades",this.productManager.darCiudades()); 
+	    model.addAttribute("bandas", this.productManager.darBandas());
 	    model.addAttribute("vista","editarDireccion.jsp");
 	    return "frontend";
 	}
@@ -62,11 +65,16 @@ public class DireccionController {
 	}
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
-	public String creaMedida(@ModelAttribute("command") Direccion dir, ModelMap model)  { 
+	public String creaMedida(@ModelAttribute("command") Direccion dir, ModelMap model, HttpSession session)  { 
     	dir.setCiudad(this.productManager.darCiudad(dir.getAuxCiu()));
+    	Cliente aux = (Cliente) session.getAttribute("sesion");
     	this.productManager.guardarDireccion(dir);
 	    model.addAttribute("direcciones",this.productManager.darDirecciones()); 
 	    model.addAttribute("vista","ABMdirecciones.jsp");
+	    if(dir.getIdDireccion() != null){
+	    	aux.getDirecciones().add(dir);
+	    	this.productManager.guardarCliente(aux);
+	    }
 	    return "frontend";
 	}
     

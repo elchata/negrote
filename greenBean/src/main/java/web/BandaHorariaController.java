@@ -22,14 +22,13 @@ public class BandaHorariaController {
 	@RequestMapping(value="/ver.htm")
 	public String mostrarBandas(ModelMap model) { 
 	    model.addAttribute("bandas",this.productManager.darBandas()); 
-	    model.addAttribute("banda", new BandaHoraria());
 	    model.addAttribute("vista","ABMbandas.jsp");
 	    return "frontend";
 	}
 
     @RequestMapping(value = "new.htm", method = RequestMethod.GET)
 	public String nuevaBanda(ModelMap model) { 
-		model.addAttribute("banda", new BandaHoraria());
+	    model.addAttribute("command", new BandaHoraria());
 		model.addAttribute("bandas",this.productManager.darBandas()); 
 	    model.addAttribute("vista","editarBanda.jsp");
 	    return "frontend";
@@ -38,8 +37,10 @@ public class BandaHorariaController {
     @RequestMapping(value="editar.htm", method = RequestMethod.GET)
 	public String verPedidos(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idBanda")); 
-	    model.addAttribute("banda", this.productManager.darBanda(val));
-	    return "editarBanda";
+		model.addAttribute("bandas", this.productManager.darBandas());
+	    model.addAttribute("command", this.productManager.darBanda(val));
+	    model.addAttribute("vista","editarBanda.jsp");
+	    return "frontend";
 	}
     
 
@@ -47,8 +48,7 @@ public class BandaHorariaController {
 	public String eliminarBanda(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idBanda"));
 		this.productManager.borrarBanda(val);			
-	    model.addAttribute("banda", this.productManager.darBandas());  
-	    model.addAttribute("banda", new BandaHoraria());  
+	    model.addAttribute("bandas", this.productManager.darBandas());  
 	    model.addAttribute("vista","ABMbandas.jsp");
 	    return "frontend";
 	}
@@ -57,7 +57,6 @@ public class BandaHorariaController {
 	public String creaPedido(@ModelAttribute("banda") BandaHoraria banda, ModelMap model) { 
     	this.productManager.guardarBanda(banda);
 	    model.addAttribute("bandas",this.productManager.darBandas()); 
-	    model.addAttribute("banda", new BandaHoraria());
 	    model.addAttribute("vista","ABMbanda.jsp");
 	    return "frontend";
 	}

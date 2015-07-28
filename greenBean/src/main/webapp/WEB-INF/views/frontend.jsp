@@ -50,7 +50,7 @@
 		<a href="<c:url value="/producto/quitar.htm?idKey=${prod.key.idProducto}"/>">Quitar</a>
 	</c:forEach>
 	<h4>Total: $<c:out value="${tot}" /></h4>
-	<a href="<c:url value="/producto/confirmarCompra.htm"/>">Confirmar Pedido</a>
+	<a href="<c:url value="/pedido/confirmarCompra.htm"/>">Confirmar Pedido</a>
 </div>
 </body>
 </html>

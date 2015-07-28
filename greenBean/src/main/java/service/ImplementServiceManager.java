@@ -398,7 +398,7 @@ public class ImplementServiceManager implements ServiceManager {
 
 
 	@Override
-	public long existeUser(String id) { 
+	public Long existeUser(String id) { 
 		return userModel.retornarPorIdFacebook(id);
 	}
 
