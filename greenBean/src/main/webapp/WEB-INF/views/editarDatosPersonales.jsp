@@ -3,7 +3,7 @@
 
 		<c:url var="actionUrl" value="/cliente/create2.htm" /> 
 		
-		<form:form id="datosForm" action="${actionUrl }" commandName="datos" method="post">		
+		<form:form id="queryForm" action="${actionUrl }" commandName="datos" method="post">		
 			<fieldset>
 				<legend></legend>
 					<label for="nombre">Nombre:</label>

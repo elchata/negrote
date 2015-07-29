@@ -4,7 +4,7 @@
 
 <div style="width: 95%; margin: 0 auto;">
 
-	<div id="provDialog" style="display: none;">
+	<div id="queryDialog" style="display: none;">
 		<%@ include file="editarProvincia.jsp"%>
 	</div>
 	<h1>Lista de Provincias</h1>
