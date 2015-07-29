@@ -65,14 +65,15 @@ public class DireccionController {
 	}
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
-	public String creaMedida(@ModelAttribute("command") Direccion dir, ModelMap model, HttpSession session)  { 
+	public String creaDireccion(@ModelAttribute("command") Direccion dir, ModelMap model, HttpSession session)  { 
     	dir.setCiudad(this.productManager.darCiudad(dir.getAuxCiu()));
-    	Cliente aux = (Cliente) session.getAttribute("sesion");
-    	if(dir.getIdDireccion() != null){
-	    	aux.getDirecciones().add(dir);
+    	if(dir.getIdDireccion() == null){
+        	Cliente aux = (Cliente) session.getAttribute("sesion");
+    		aux.getDirecciones().add(dir);
 	    	this.productManager.guardarCliente(aux);
 	    }
-    	this.productManager.guardarDireccion(dir);
+    	else
+        	this.productManager.guardarDireccion(dir);
 	    model.addAttribute("direcciones",this.productManager.darDirecciones()); 
 	    model.addAttribute("vista","ABMdirecciones.jsp");
 	    return "frontend";

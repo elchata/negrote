@@ -28,6 +28,7 @@ public class Pedido {
 	private double precioFinal;
 	private Map<Producto,Integer> productos = new HashMap<Producto, Integer>();
 	private User cliente;
+	private Direccion direccion;
 	private Estado estado;
 	
 	@Id
@@ -83,6 +84,12 @@ public class Pedido {
 	}
 	public Pedido() {
 		super();
+	}
+	public Direccion getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
 	}
 	
 	

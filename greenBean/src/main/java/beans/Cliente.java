@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection; 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;  
@@ -26,8 +27,7 @@ public class Cliente extends User implements Serializable {
 	private Map<Producto, Integer> visitas = new HashMap<Producto, Integer>();
 	private List<Pedido> pedidos = new ArrayList<Pedido>(0);
 	private Contenedor carrito;
-	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(
 			name="cliente_direccion",

@@ -19,10 +19,10 @@
 					<c:forEach items="${command.cliente.direcciones}" var="dir">
 								<c:choose>
 		                    		<c:when test="${command.cliente.direcciones.contains(dir)}"> 
-		                        		<form:checkbox path="direccion" label="${dir.calle} ${dir.ciudad} ${dir.ciudad.partido }" value="${dir.idDireccion}" checked="checked"/> 
+		                        		<form:radiobutton path="direccion" label="${dir.calle} ${dir.ciudad.nombre} ${dir.ciudad.partido.nombre }" value="${dir.idDireccion}" checked="checked"/> 
 		                    		</c:when>
 		                    		<c:otherwise> 
-		                        		<form:checkbox path="direccion" label="${dir.calle} ${dir.ciudad} ${dir.ciudad.partido }" value="${dir.idDireccion}"/>
+		                        		<form:radiobutton path="direccion" label="${dir.calle} ${dir.ciudad.nombre} ${dir.ciudad.partido.nombre }" value="${dir.idDireccion}"/>
 		                    		</c:otherwise>
 		                		</c:choose>	
 					</c:forEach>
