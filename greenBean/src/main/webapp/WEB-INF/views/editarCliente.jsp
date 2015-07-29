@@ -23,7 +23,11 @@
 					 		</c:forEach>
 					</form:select>
 					</td>					
-				</tr>				 
+				</tr>			
+				<tr>
+					<td>Id Facebook : </td>
+					<td><form:input path="idFacebook" value="${command.idFacebook}"/></td>
+				</tr>	 
 				<form:hidden path="idUser"/>					 
 				<tr>
 					<td colspan="3"><input type="submit" value="Enviar Datos"/></td>

@@ -33,6 +33,26 @@ $(function() {
 		}
 	});
 	
+	$("#datosDialog").dialog({
+		autoOpen : false,
+		position : 'center',
+		modal : true,
+		resizable : false,
+		width : 440,
+		buttons : {
+			"Guardar" : function() {
+				$('#datosForm').submit();
+			},
+			"Cancelar" : function() {
+				$(this).dialog('close');
+			}
+		},
+		close : function() {	
+			resetDialog($('#datosForm'));	
+			$(this).dialog('close');
+		}
+	});
+	
 	function resetDialog(form) {
 	
 		form.find("input").val("");
@@ -62,6 +82,14 @@ function editarProv(id) {
 		$("#provDialog").html(result);
 		$('#provDialog').dialog("option", "title", 'Editar Provincia');
 		$("#provDialog").dialog('open'); 
+	});
+} 
+
+function editarDatos(id) {
+	$.get("editarDatos.htm?idCli=" + id, function(result) {
+		$("#datosDialog").html(result);
+		$('#datosDialog').dialog("option", "title", 'Datos Personales');
+		$("#datosDialog").dialog('open'); 
 	});
 } 
 

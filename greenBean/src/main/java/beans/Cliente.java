@@ -25,7 +25,7 @@ public class Cliente extends User implements Serializable {
 	private List<Direccion> direcciones = new ArrayList<Direccion>(0);
 	private Map<Producto, Integer> visitas = new HashMap<Producto, Integer>();
 	private List<Pedido> pedidos = new ArrayList<Pedido>(0);
-	private Contenedor carrito;
+	private Carrito carrito;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -60,14 +60,11 @@ public class Cliente extends User implements Serializable {
 	
 	@OneToOne
 	@JoinColumn(name = "idContenedor")
-	public Contenedor getCarrito() {
+	public Carrito getCarrito() {
 		return carrito;
 	}
-	public void setCarrito(Contenedor carrito) {
+	public void setCarrito(Carrito carrito) {
 		this.carrito = carrito;
 	}
-	
-	
-	
 
 }

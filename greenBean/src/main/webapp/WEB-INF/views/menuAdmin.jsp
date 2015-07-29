@@ -6,7 +6,7 @@
     
 <ul>
 	<li><a href="<c:url value="/categoria/ver.htm"/>">ABM categorias</a></li>
-	<li><a href="<c:url value="/cliente/ver.htm"/>">ABM clientes</a></li>
+	<li><a href="<c:url value="/cliente/ver.htm"/>">ABM clientes ( va a pasar a ser solo eliminar.. el alta y edicion la hace el user)</a></li>
 	<li><a href="<c:url value="/direccion/ver.htm"/>">ABM direcciones</a></li>
 	<li><a href="<c:url value="/medida/ver.htm"/>">ABM medidas</a></li>
 	<li><a href="<c:url value="/producto/ver.htm"/>">ABM productos</a></li>
