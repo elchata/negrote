@@ -68,13 +68,13 @@ public class DireccionController {
 	public String creaMedida(@ModelAttribute("command") Direccion dir, ModelMap model, HttpSession session)  { 
     	dir.setCiudad(this.productManager.darCiudad(dir.getAuxCiu()));
     	Cliente aux = (Cliente) session.getAttribute("sesion");
-    	this.productManager.guardarDireccion(dir);
-	    model.addAttribute("direcciones",this.productManager.darDirecciones()); 
-	    model.addAttribute("vista","ABMdirecciones.jsp");
-	    if(dir.getIdDireccion() != null){
+    	if(dir.getIdDireccion() != null){
 	    	aux.getDirecciones().add(dir);
 	    	this.productManager.guardarCliente(aux);
 	    }
+    	this.productManager.guardarDireccion(dir);
+	    model.addAttribute("direcciones",this.productManager.darDirecciones()); 
+	    model.addAttribute("vista","ABMdirecciones.jsp");
 	    return "frontend";
 	}
     
