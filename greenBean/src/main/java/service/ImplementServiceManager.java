@@ -86,6 +86,7 @@ public class ImplementServiceManager implements ServiceManager {
     
     @Autowired
     private BandaHorariaDAO bandaHorariaModel;
+    
 	
 	/*
 	 * (non-Javadoc)
@@ -224,6 +225,11 @@ public class ImplementServiceManager implements ServiceManager {
 	@Override
 	public void borrarBanda(Long val) {
 		bandaHorariaModel.borrar(val);
+	}
+
+	@Override
+	public void borrarCarrito(Long val) {
+		carritoModel.borrar(val);
 	}
 	
 	/*
@@ -407,5 +413,7 @@ public class ImplementServiceManager implements ServiceManager {
 	public User darUser(long id) { 
 		return userModel.retornarPorId(id);
 	}
+
+
 
 }

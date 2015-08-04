@@ -18,8 +18,6 @@ import auxiliares.DatosFacebook;
 import beans.Cliente;
 import beans.Contenedor;
 import beans.Empresa; 
-import beans.Pedido;
-import beans.Producto;
 import beans.User;
 import service.ServiceManager;
 
@@ -104,15 +102,7 @@ public class InventoryController {
     	return "loggin";
     }
     
-    public void creaPed(){
-    	Pedido aux=new Pedido();
-    	aux.setPrecioFinal(270.80);
-    	Producto pr = this.productManager.darProducto((long) 1);
-    	aux.getProductos().put(pr, 2);
-    	aux.getProductos().put(this.productManager.darProducto((long) 2), 8);
-    	aux.setCliente(this.productManager.darCliente((long) 1));
-    	this.productManager.guardarPedido(aux);
-    }     
+    
     
     public void datosUser(){
     	Map<String,String> dato = new HashMap<String,String>();

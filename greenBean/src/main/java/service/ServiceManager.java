@@ -124,6 +124,8 @@ public interface ServiceManager extends Serializable {
     public void borrarPartido(Long val);
 
 	public void borrarBanda(Long val);
+
+	public void borrarCarrito(Long val);
     
 /* AUX */
     

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import service.ServiceManager;  
 import beans.Cliente;
-import beans.Contenedor;
 import beans.Nuevo;
 import beans.Pedido;
 
@@ -46,7 +45,8 @@ public class PedidoController {
 	public String nuevoPedidoMio(HttpServletRequest req, ModelMap model) { 
     	Long val = Long.parseLong(req.getParameter("idCli"));
     	Pedido ped = new Pedido();
-    	ped.setCliente(this.productManager.darCliente(val));
+    	ped.setEstado(new Nuevo());
+    	ped.setCliente((Cliente)this.productManager.darCliente(val));
 		model.addAttribute("command", ped);
 		model.addAttribute("pedidos",this.productManager.darPedidos()); 
 	    model.addAttribute("vista","editarPedido.jsp");
@@ -64,8 +64,10 @@ public class PedidoController {
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaPedido(@ModelAttribute("command") Pedido ped, ModelMap model) { 
-    	ped.setCliente(this.productManager.darCliente(ped.getCliente().getIdUser()));
     	this.productManager.guardarPedido(ped);
+    	this.productManager.borrarCarrito(ped.getCliente().getCarrito().getIdContenedor());
+    	ped.getCliente().setCarrito(null);
+    	this.productManager.guardarCliente(ped.getCliente());
 	    model.addAttribute("pedidos",this.productManager.darPedidos()); 
 	    model.addAttribute("vista","ABMpedidos.jsp");
 	    return "frontend";
@@ -82,8 +84,7 @@ public class PedidoController {
     @RequestMapping(value="confirmarCompra.htm", method = RequestMethod.GET)
     public String confirmarPedido(HttpServletRequest req, ModelMap model, HttpSession session){
     	Cliente aux = (Cliente) session.getAttribute("sesion");
-		Contenedor carro = aux.getCarrito();
-		Pedido nuevo = new Pedido(carro.getPrecio(), carro.getProductos(), aux, new Nuevo());
+		Pedido nuevo = new Pedido(aux, new Nuevo());
 		model.addAttribute("command", nuevo);
 		model.addAttribute("vista","editarPedido.jsp");
     	return "frontend";
