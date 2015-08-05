@@ -57,7 +57,7 @@ public class BandaHorariaController {
 	public String creaPedido(@ModelAttribute("banda") BandaHoraria banda, ModelMap model) { 
     	this.productManager.guardarBanda(banda);
 	    model.addAttribute("bandas",this.productManager.darBandas()); 
-	    model.addAttribute("vista","ABMbanda.jsp");
+	    model.addAttribute("vista","ABMbandas.jsp");
 	    return "frontend";
 	}
     
