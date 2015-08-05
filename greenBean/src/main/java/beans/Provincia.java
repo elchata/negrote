@@ -39,6 +39,22 @@ public class Provincia implements Serializable{
 		this.nombre = nombre;
 	}
 	
+	@Override
+	 public boolean equals (Object obj) {
+
+      if (obj instanceof Provincia) {
+          Provincia tmpProd = (Provincia) obj;
+          if (this.getNombre().equals(tmpProd.getNombre()) ) {
+              return true; } 
+          else { return false; }
+
+      }  else { return false; }
+  } // Cierre del método equals 
+	
+	@Override
+	public int hashCode(){
+		return this.getIdProvincia().intValue();
+	}
 	
 
 }

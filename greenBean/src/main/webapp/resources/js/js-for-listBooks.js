@@ -3,7 +3,7 @@ $(function() {
 	$("#queryDialog").dialog({
 		autoOpen : false,
 		position : 'center',
-		modal : true,
+		modal : true,  
 		resizable : false,
 		width : 440,
 		buttons : {

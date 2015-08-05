@@ -68,5 +68,21 @@ public class Partido implements Serializable{
 		
 	}
 	
+	@Override
+	 public boolean equals (Object obj) {
+
+      if (obj instanceof Partido) {
+          Partido tmpProd = (Partido) obj;
+          if (this.getNombre().equals(tmpProd.getNombre()) ) {
+              return true; } 
+          else { return false; }
+
+      }  else { return false; }
+  } // Cierre del método equals 
+	
+	@Override
+	public int hashCode(){
+		return this.getIdPartido().intValue();
+	}
 
 }

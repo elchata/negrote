@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import beans.Partido;
+import beans.Provincia;
 import service.ServiceManager;
 
 @Controller
@@ -32,7 +33,7 @@ public class PartidoController {
     
     @RequestMapping(value = "new.htm", method = RequestMethod.GET)
    	public String nuevoPartido(ModelMap model) { 
-   		model.addAttribute("command", new Partido());
+   		model.addAttribute("partidoForm", new Partido());
    		model.addAttribute("partidos",this.productManager.darPartidos()); 
    	    model.addAttribute("provincias",this.productManager.darProvincias()); 
    	    model.addAttribute("vista","editarPartido.jsp");
@@ -42,7 +43,9 @@ public class PartidoController {
     @RequestMapping(value="editar.htm", method = RequestMethod.GET)
 	public String verPartidos(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idPar"));
-   		model.addAttribute("command", this.productManager.darPartido(val));
+		Partido par=  this.productManager.darPartido(val);
+   		model.addAttribute("partidoForm",par);
+   		model.addAttribute("provinciaForm",par.getProvincia());
    		model.addAttribute("partidos",this.productManager.darPartidos()); 
    	    model.addAttribute("provincias",this.productManager.darProvincias()); 
    	    model.addAttribute("vista","editarPartido.jsp");
@@ -59,10 +62,10 @@ public class PartidoController {
 	}
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
-	public String creaPartido(@ModelAttribute("command") Partido par, ModelMap model)  {  
+	public String creaPartido(@ModelAttribute("provinciaForm") Provincia prov,@ModelAttribute("partidoForm") Partido part, ModelMap model)  {  
     	
-    	par.setProvincia(this.productManager.darProvincia(par.getProvincia().getIdProvincia()));
-    	this.productManager.guardarPartido(par);
+    	part.setProvincia(prov); 
+    	this.productManager.guardarPartido(part);
 	    model.addAttribute("partidos",this.productManager.darPartidos()); 
 	    model.addAttribute("vista","ABMpartidos.jsp");
 	    return "frontend";

@@ -5,29 +5,20 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
  
 		<h2>Datos Partido</h2>
-		<form:form method="POST" action="./create.htm" modelattribute="command">		
+		<form:form method="POST" action="./create.htm">		
 			<table> 
 				<tr>
 					<td>Provincia:</td>
 					<td>
-					<form:select path="provincia.idProvincia"> 
-					 		<c:forEach items="${provincias}" var="prov">
-					  			<c:choose>
-		                    		<c:when test="${prov.idProvincia== command.provincia.idProvincia}">
-		                        		<form:option value="${prov.idProvincia}" selected="selected" label="${prov.nombre}"/>
-		                    		</c:when>
-		                    		<c:otherwise>
-		                        		<form:option value="${prov.idProvincia}" label="${prov.nombre}"/>
-		                    		</c:otherwise>
-		                		</c:choose>			
-					 		</c:forEach>
+					<form:select path="provinciaForm.idProvincia">  
+						<form:options items="${provincias}" itemLabel="nombre" itemValue="idProvincia" />						 	 
 					</form:select></td>
 				</tr>
 				<tr>
 					<td>Nombre: </td>
-					<td><form:input path="nombre" value="${command.nombre}"/></td>
+					<td><form:input path="partidoForm.nombre" value="${partidoForm.nombre}"/></td>
 				</tr>
-			<form:hidden path="idPartido"/>		 			 
+			<form:hidden path="partidoForm.idPartido"/>		 			 
 				<tr>
 					<td colspan="3"><input type="submit" value="Enviar Datos"/></td>
 				</tr>

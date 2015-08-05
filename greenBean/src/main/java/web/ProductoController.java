@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import auxiliares.DatosCompra;
 import auxiliares.DatosFormulario; 
@@ -52,14 +53,18 @@ public class ProductoController {
 	}
     
     @RequestMapping(value="result.htm", method = RequestMethod.POST)
-	public String resultProductos(@ModelAttribute("find") DatosFormulario res,ModelMap model) {  
-    	List<Producto> prods = this.productManager.darProductos(res.getNombre());
-    	if ( prods.size() > 0 ) {
-    	model.addAttribute("productos", prods); 
-	    model.addAttribute("vista","ABMproductos.jsp");
-    	}
-    	else model.addAttribute("vista","errorBusqueda.jsp");
-	    return "frontend";
+	public String resultProductos(HttpSession session,@ModelAttribute("find") DatosFormulario res,ModelMap model) {  
+    	List<Producto> prods = this.productManager.darProductos(res.getNombre()); 
+    	model.addAttribute("productos", prods);  
+    	return this.listarProductos(session, model);
+	}
+    
+    @RequestMapping(value="filtro.htm", method = RequestMethod.GET)
+	public String resultFiltro(HttpSession session,@RequestParam(value = "cat") Categoria cat,ModelMap model) {  
+    	
+    	List<Producto> prods = cat.getProductos(); 
+    	model.addAttribute("productos", prods);  
+    	return this.listarProductos(session, model);
 	}
     
     @RequestMapping(value = "new.htm", method = RequestMethod.GET)
@@ -143,12 +148,11 @@ public class ProductoController {
 	    model.addAttribute("producto", this.productManager.darProducto(val));
 	    model.addAttribute("compra", new DatosCompra());
 	    return "comprarProducto";
-	}
+	} 
     
-    @RequestMapping(value="listar.htm", method = RequestMethod.GET)
-	public String listarProductos(ModelMap model) {  
-	    model.addAttribute("productos",this.productManager.darProductos());
+	public String listarProductos(HttpSession session,ModelMap model) {  
 	    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
+	    model.addAttribute("objForm", new DatosFormulario());
 	    
 	    // bean con los datos de producto y cantidad que luego son agregados al hashmap
 	    
@@ -157,9 +161,16 @@ public class ProductoController {
 	    //---------------------
 	    
 	    model.addAttribute("vista","listarProductos.jsp");
+	    Cliente aux = (Cliente) session.getAttribute("sesion");
+	    model.addAttribute("maximo", aux.getVisitasOrdenadas().firstKey()); 
 	    return "frontend";
 	}
     
+    @RequestMapping(value="listar.htm", method = RequestMethod.GET)
+	public String listarTodosProductos(HttpSession session,ModelMap model) {  
+	    model.addAttribute("productos",this.productManager.darProductos()); 
+	    return this.listarProductos(session, model);
+	}
     @RequestMapping(value="agregarCarro.htm", method = RequestMethod.POST)
    	public String adicionarCompra(HttpSession session, @ModelAttribute("compra") DatosCompra compra, ModelMap model) {  
     	Cliente aux = (Cliente) session.getAttribute("sesion");
@@ -167,7 +178,19 @@ public class ProductoController {
     	Carrito carro = aux.getCarrito();
     	carro.getProductos().put(prod, compra.getCantidad());
     	carro.setFecha(new Date());
-    	this.productManager.guardarCarrito(carro);
+    	
+    	// subir cantidad de visitas del cliente y del producto
+    	int cant = 1;
+    	if (aux.getVisitas().containsKey(prod)) cant = aux.getVisitas().get(prod) + 1;
+    	aux.getVisitas().put(prod, cant);
+    	this.productManager.guardarCliente(aux);
+    	// 
+    	prod.getVisitas().put(aux, cant);
+    	this.productManager.guardarProducto(prod);
+    	
+    	//++++++++++++++++++
+    	
+    	this.productManager.guardarCarrito(carro);    	
     	return "redirect:listar.htm";
    	}
     
