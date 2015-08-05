@@ -61,7 +61,6 @@ public class PartidoController {
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaPartido(@ModelAttribute("command") Partido par, ModelMap model)  {  
     	
-    	par.setProvincia(this.productManager.darProvincia(par.getProvincia().getIdProvincia()));
     	this.productManager.guardarPartido(par);
 	    model.addAttribute("partidos",this.productManager.darPartidos()); 
 	    model.addAttribute("vista","ABMpartidos.jsp");

@@ -130,7 +130,6 @@ public class ProductoController {
 		//-----------------------------------------------
 		if ((prod.getPrecios().isEmpty()) || (prod.obtenerPrecio() != prod.getAuxMon()))
 			prod.agregarPrecio(new Precio(prod.getAuxMon()));
-		prod.setMedida(this.productManager.darMedida(prod.getAuxMed()));
 		this.productManager.guardarProducto(prod);
 	    model.addAttribute("productos",this.productManager.darProductos()); 
 	    model.addAttribute("vista","ABMproductos.jsp");

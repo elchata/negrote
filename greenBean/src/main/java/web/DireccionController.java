@@ -66,7 +66,6 @@ public class DireccionController {
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaDireccion(@ModelAttribute("command") Direccion dir, ModelMap model, HttpSession session)  { 
-    	dir.setCiudad(this.productManager.darCiudad(dir.getAuxCiu()));
     	if(dir.getIdDireccion() == null){
         	Cliente aux = (Cliente) session.getAttribute("sesion");
     		aux.getDirecciones().add(dir);

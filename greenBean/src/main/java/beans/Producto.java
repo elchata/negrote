@@ -232,16 +232,7 @@ public class Producto implements Serializable{
 		this.categos = categos;
 	}
 	
-	@Transient
-	private Long auxMed=null ;
-	@Transient
-	public Long getAuxMed(){
-		return auxMed;
-	}
-	@Transient
-	public void setAuxMed(Long auxMed) {
-		this.auxMed = auxMed;
-	}
+	
 	
 	@Transient
 	private Long auxMon=null ;

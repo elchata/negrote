@@ -12,12 +12,12 @@
 					<td><form:input path="precioFinal" value="${command.precioFinal}"/></td>
 				</tr>
 				
-				 
+				<form:hidden path="cliente.idUser"/> 
 				<form:hidden path="idPedido"/>		
 				<tr>
 					<td>Direccion : </td>
 					<c:forEach items="${command.cliente.direcciones}" var="dir">
-							<form:radiobutton path="direccion" label="${dir.calle} ${dir.ciudad.nombre} ${dir.ciudad.partido.nombre }" value="${dir.idDireccion}"/> 
+							<form:radiobutton path="direccion.idDireccion" label="${dir.calle} ${dir.ciudad.nombre} ${dir.ciudad.partido.nombre }" value="${dir.idDireccion}"/> 
 					</c:forEach>
 				</tr>	
 				<form:textarea path="estado.detalle" rows="5" cols="30" />		 

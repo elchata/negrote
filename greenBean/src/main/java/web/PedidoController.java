@@ -63,11 +63,13 @@ public class PedidoController {
 	}
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
-	public String creaPedido(@ModelAttribute("command") Pedido ped, ModelMap model) { 
+	public String creaPedido(@ModelAttribute("command") Pedido ped, ModelMap model, HttpSession session) { 
     	this.productManager.guardarPedido(ped);
-    	this.productManager.borrarCarrito(ped.getCliente().getCarrito().getIdContenedor());
-    	ped.getCliente().setCarrito(null);
-    	this.productManager.guardarCliente(ped.getCliente());
+    	Cliente aux = (Cliente) session.getAttribute("sesion");
+    	Long auxCar = aux.getCarrito().getIdContenedor();
+    	aux.setCarrito(null);
+    	this.productManager.guardarCliente(aux);
+    	this.productManager.borrarCarrito(auxCar);
 	    model.addAttribute("pedidos",this.productManager.darPedidos()); 
 	    model.addAttribute("vista","ABMpedidos.jsp");
 	    return "frontend";
