@@ -3,31 +3,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+	<div id="queryDialog" style="display: none;">
+		<%@ include file="editarDatosPersonales.jsp"%>
+	</div>
  
-		<h2>Datos Cliente</h2>	
-			<table>
-				<tr>
-					<td>Numero de Usuario : </td>
-					<td><c:out value="${cliente.idUser}"/></td>
-				</tr>	
+		<h3>Mis Datos</h3>	
+			<table> 
 				<tr>
 					<td>Logeado a travez de : </td>
 					<td><c:out value="${cliente.empresa.nombre}"/></td>
-				</tr>	 	
+				</tr>	
 				<tr>
-					<td>Sus pedidos son: </td>
-					 <c:forEach items="${cliente.pedidos}" var="ped">
-						<td><a href="../pedido/mostrar.htm?idPed=${ped.idPedido}">${ped.idPedido}</a></td>
-					</c:forEach>
-					<td><a href="<c:url value="/pedido/miPedido.htm?idCli=${cliente.idUser}"/>">Agregar Nuevo Pedido</a></td>
-				</tr>
+					<td>Id de Facebook : </td>
+					<td><c:out value="${cliente.idFacebook}"/></td>
+				</tr> 
 				<tr>
-					<td>Datos: </td>
+					<td><h4>Datos: </h4></td>
 					 <c:forEach items="${cliente.datos}" var="dato">
-						<td>${dato.key} : ${dato.value}</td>
+						<tr><td>${dato.key} : ${dato.value}</td></tr>
 					</c:forEach>
 				</tr> 
+				<tr>
+				<td><button onclick="editarDatos(${cliente.idUser})">Editar datos personales</button></td>
+				</tr> 
 			</table>
-		<br>
-		
-<a href="./ver.htm">Ver Clientes</a> 
+		<br> 

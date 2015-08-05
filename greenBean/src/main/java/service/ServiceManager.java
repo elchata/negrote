@@ -63,7 +63,7 @@ public interface ServiceManager extends Serializable {
     
    	public Empresa darEmpresa(Long id);
     
-	public User darCliente(long l);
+	public Cliente darCliente(long l);
 	
 	public Provincia darProvincia(long l);	
 
@@ -76,6 +76,8 @@ public interface ServiceManager extends Serializable {
     public Partido darPartido(Long val);
 	
 	public BandaHoraria darBanda(Long val);
+
+	public Empresa darEmpresaPorNombre(String string);
     
 /* POST */
     
@@ -99,7 +101,7 @@ public interface ServiceManager extends Serializable {
 
     public void guardarPartido(Partido par);
     
-    public void guardarCarrito(Carrito carrito);
+    public Carrito guardarCarrito(Carrito carrito);
 
 	public void guardarBanda(BandaHoraria ban);
 

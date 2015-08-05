@@ -253,8 +253,8 @@ public class ImplementServiceManager implements ServiceManager {
 	}
 
 	@Override
-	public void guardarCarrito(Carrito carrito) {
-		carritoModel.actualizar(carrito);		
+	public Carrito guardarCarrito(Carrito carrito) {
+		return carritoModel.actualizar(carrito);		
 	} 
 
 
@@ -341,7 +341,7 @@ public class ImplementServiceManager implements ServiceManager {
 
 
 	@Override
-	public User darCliente(long l) {
+	public Cliente darCliente(long l) {
 		// TODO Auto-generated method stub
 		return this.clienteModel.retornarPorId(l);
 	} 
@@ -415,5 +415,13 @@ public class ImplementServiceManager implements ServiceManager {
 	}
 
 
+<<<<<<< HEAD
+=======
+	@Override
+	public Empresa darEmpresaPorNombre(String string) {
+		// TODO Auto-generated method stub
+		return empresaModel.retornarPorNombre(string);
+	}
+>>>>>>> bb8667afb14b1d081f13821ffa43fc221cd0e06d
 
 }

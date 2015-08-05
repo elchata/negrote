@@ -24,7 +24,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED) 
 @Table(name = "contenedor")
-public class Contenedor implements Serializable{
+public abstract class Contenedor implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Long idContenedor;

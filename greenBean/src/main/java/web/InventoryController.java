@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import auxiliares.DatosFacebook; 
-import beans.Cliente;
-import beans.Contenedor;
+import beans.Carrito;
+import beans.Cliente; 
 import beans.Empresa; 
 import beans.User;
 import service.ServiceManager;
@@ -90,9 +90,10 @@ public class InventoryController {
 		aux.put("apellido", datos.getApellido());
 		aux.put("faceNombre", datos.getFaceNombre());
 		cli.setDatos(aux);
-		Contenedor carro = new Contenedor();
-		carro = this.productManager.guardarContenedor(carro);
+		Carrito carro = new Carrito();
+		carro = this.productManager.guardarCarrito(carro);
 		cli.setCarrito(carro);
+		cli.setEmpresa(this.productManager.darEmpresaPorNombre("Facebook"));
 		this.productManager.guardarCliente(cli);
     	return "redirect:hello.htm";
     }
@@ -102,6 +103,7 @@ public class InventoryController {
     	return "loggin";
     }
     
+<<<<<<< HEAD
     
     
     public void datosUser(){
@@ -116,4 +118,15 @@ public class InventoryController {
     	aux.setDatos(dato);
     	this.productManager.guardarCliente(aux);
     	}
+=======
+    public void creaPed(){
+    	Pedido aux=new Pedido();
+    	aux.setPrecioFinal(270.80);
+    	Producto pr = this.productManager.darProducto((long) 1);
+    	aux.getProductos().put(pr, 2);
+    	aux.getProductos().put(this.productManager.darProducto((long) 2), 8);
+    	aux.setCliente(this.productManager.darCliente((long) 1));
+    	this.productManager.guardarPedido(aux);
+    }      
+>>>>>>> bb8667afb14b1d081f13821ffa43fc221cd0e06d
 }

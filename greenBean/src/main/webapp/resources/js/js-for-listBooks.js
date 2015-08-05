@@ -1,6 +1,6 @@
 
 $(function() {
-	$("#provDialog").dialog({
+	$("#queryDialog").dialog({
 		autoOpen : false,
 		position : 'center',
 		modal : true,
@@ -8,14 +8,14 @@ $(function() {
 		width : 440,
 		buttons : {
 			"Guardar" : function() {
-				$('#provForm').submit();
+				$('#queryForm').submit();
 			},
 			"Cancelar" : function() {
 				$(this).dialog('close');
 			}
 		},
 		close : function() {	
-			resetDialog($('#provForm'));	
+			resetDialog($('#queryForm'));	
 			$(this).dialog('close');
 		}
 	});
@@ -39,8 +39,8 @@ $(function() {
 	} 
 	
 	$("#abrido").button().click(function () {
-		$("#provDialog").dialog("option", "title", 'Crear Provincia');
-		$("#provDialog").dialog("open");
+		$("#queryDialog").dialog("option", "title", 'Crear Provincia');
+		$("#queryDialog").dialog("open");
 	});
 });
 
@@ -53,15 +53,23 @@ function multiplicar(val){
 } 
 
 function addProv() {
-	$('#provDialog').dialog("option", "title", 'Agregar provincia');
-	$('#provDialog').dialog('open');
+	$('#queryDialog').dialog("option", "title", 'Agregar provincia');
+	$('#queryDialog').dialog('open');
 }
 
 function editarProv(id) {
 	$.get("editar.htm?idProv=" + id, function(result) {
-		$("#provDialog").html(result);
-		$('#provDialog').dialog("option", "title", 'Editar Provincia');
-		$("#provDialog").dialog('open'); 
+		$("#queryDialog").html(result);
+		$('#queryDialog').dialog("option", "title", 'Editar Provincia');
+		$("#queryDialog").dialog('open'); 
+	});
+} 
+
+function editarDatos(id) {
+	$.get("editarDatos.htm?idCli=" + id, function(result) {
+		$("#queryDialog").html(result);
+		$('#queryDialog').dialog("option", "title", 'Datos Personales');
+		$("#queryDialog").dialog('open'); 
 	});
 } 
 

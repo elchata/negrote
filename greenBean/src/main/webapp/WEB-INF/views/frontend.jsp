@@ -32,7 +32,7 @@
 		</div>
 	</c:when>
 	<c:otherwise>
-		<div id="sesion">Id de Usuario: ${sesion.idUser}<a href=" <c:url value="/cerrarSesion.htm"/>">Cerrar Sesion</a></div>
+		<div id="sesion"><a href=" <c:url value="/cliente/mostrar.htm?idCli=${sesion.idUser }"/>">Ver mi perfil</a> <a href=" <c:url value="/cerrarSesion.htm"/>">Cerrar Sesion</a></div>
 	</c:otherwise>
 </c:choose>  
 <div id="cuerpo" style="width: 70%; float: left;">

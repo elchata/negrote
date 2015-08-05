@@ -3,7 +3,7 @@
 
 		<c:url var="actionUrl" value="create.htm" /> 
 		
-		<form:form id="provForm" action="${actionUrl }" commandName="provinc" method="post">		
+		<form:form id="queryForm" action="${actionUrl }" commandName="provinc" method="post">		
 			<fieldset>
 				<legend></legend>
 					<label for="nombre">Nombre de Provincia:</label>
