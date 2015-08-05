@@ -17,14 +17,7 @@
 				<tr>
 					<td>Direccion : </td>
 					<c:forEach items="${command.cliente.direcciones}" var="dir">
-								<c:choose>
-		                    		<c:when test="${command.cliente.direcciones.contains(dir)}"> 
-		                        		<form:checkbox path="direccion" label="${dir.calle} ${dir.ciudad} ${dir.ciudad.partido }" value="${dir.idDireccion}" checked="checked"/> 
-		                    		</c:when>
-		                    		<c:otherwise> 
-		                        		<form:checkbox path="direccion" label="${dir.calle} ${dir.ciudad} ${dir.ciudad.partido }" value="${dir.idDireccion}"/>
-		                    		</c:otherwise>
-		                		</c:choose>	
+							<form:radiobutton path="direccion" label="${dir.calle} ${dir.ciudad.nombre} ${dir.ciudad.partido.nombre }" value="${dir.idDireccion}"/> 
 					</c:forEach>
 				</tr>	
 				<form:textarea path="estado.detalle" rows="5" cols="30" />		 

@@ -86,6 +86,7 @@ public class ImplementServiceManager implements ServiceManager {
     
     @Autowired
     private BandaHorariaDAO bandaHorariaModel;
+    
 	
 	/*
 	 * (non-Javadoc)
@@ -224,6 +225,11 @@ public class ImplementServiceManager implements ServiceManager {
 	@Override
 	public void borrarBanda(Long val) {
 		bandaHorariaModel.borrar(val);
+	}
+
+	@Override
+	public void borrarCarrito(Long val) {
+		carritoModel.borrar(val);
 	}
 	
 	/*
@@ -409,10 +415,13 @@ public class ImplementServiceManager implements ServiceManager {
 	}
 
 
+<<<<<<< HEAD
+=======
 	@Override
 	public Empresa darEmpresaPorNombre(String string) {
 		// TODO Auto-generated method stub
 		return empresaModel.retornarPorNombre(string);
 	}
+>>>>>>> bb8667afb14b1d081f13821ffa43fc221cd0e06d
 
 }
