@@ -18,6 +18,8 @@ import auxiliares.DatosFacebook;
 import beans.Carrito;
 import beans.Cliente; 
 import beans.Empresa; 
+import beans.Pedido;
+import beans.Producto;
 import beans.User;
 import service.ServiceManager;
 
@@ -103,7 +105,6 @@ public class InventoryController {
     	return "loggin";
     }
     
-<<<<<<< HEAD
     
     
     public void datosUser(){
@@ -118,7 +119,6 @@ public class InventoryController {
     	aux.setDatos(dato);
     	this.productManager.guardarCliente(aux);
     	}
-=======
     public void creaPed(){
     	Pedido aux=new Pedido();
     	aux.setPrecioFinal(270.80);
@@ -128,5 +128,4 @@ public class InventoryController {
     	aux.setCliente(this.productManager.darCliente((long) 1));
     	this.productManager.guardarPedido(aux);
     }      
->>>>>>> bb8667afb14b1d081f13821ffa43fc221cd0e06d
 }
