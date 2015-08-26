@@ -11,9 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import service.ServiceManager;  
+import beans.Cancelado;
 import beans.Cliente;
+import beans.Confirmado;
+import beans.Entregado;
+import beans.Enviado;
+import beans.Estado;
 import beans.Nuevo;
 import beans.Pedido;
+import beans.Preparado;
 
 @Controller
 @RequestMapping(value="/pedido")
@@ -32,13 +38,14 @@ public class PedidoController {
 	    model.addAttribute("vista","ABMpedidos.jsp");
 	    return "frontend";
 	}
-
-    @RequestMapping(value = "new.htm", method = RequestMethod.GET)
-	public String nuevoPedido(ModelMap model) { 
-		model.addAttribute("command", new Pedido());
-		model.addAttribute("pedidos",this.productManager.darPedidos()); 
-	    model.addAttribute("vista","editarPedido.jsp");
-	    return "frontend";
+	
+	@RequestMapping(value="/cambiarEstado.htm")
+	public String avanzarPedido(HttpServletRequest req, ModelMap model) { 
+		Long val = Long.parseLong(req.getParameter("idPed"));
+		Pedido ped = this.productManager.darPedido(val);
+		model.addAttribute("command", ped);
+		model.addAttribute("vista","editar"+req.getParameter("idPed")+".jsp");
+    	return "frontend";
 	}
     
     @RequestMapping(value = "miPedido.htm", method = RequestMethod.GET)
@@ -64,7 +71,7 @@ public class PedidoController {
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaPedido(@ModelAttribute("command") Pedido ped, ModelMap model, HttpSession session) { 
-    	((Nuevo)ped.getEstado()).setDetalle(ped.getAuxDetalle());
+    	((Nuevo)ped.getEstado()).setDetalle(ped.getAuxString());
     	this.productManager.guardarPedido(ped);
     	Cliente aux = (Cliente) session.getAttribute("sesion");
     	Long auxCar = aux.getCarrito().getIdContenedor();
@@ -75,6 +82,44 @@ public class PedidoController {
 	    model.addAttribute("vista","ABMpedidos.jsp");
 	    return "frontend";
 	} 
+    
+    @RequestMapping(value = "/guardarConfirmado.htm", method = RequestMethod.POST)
+	public String avanzaConfirmado(@ModelAttribute("command") Pedido ped, ModelMap model) { 
+    	Confirmado estado = new Confirmado((Nuevo) ped.getEstado(), ped.getAuxString());
+    	return this.avanzar(ped, model, estado);
+	} 
+    
+    @RequestMapping(value = "/guardarCancelado.htm", method = RequestMethod.POST)
+	public String avanzaCancelado(@ModelAttribute("command") Pedido ped, ModelMap model) { 
+    	Cancelado estado = new Cancelado(ped.getEstado(), ped.getAuxString());
+    	return this.avanzar(ped, model, estado);
+	} 
+    
+    @RequestMapping(value = "/guardarPreparado.htm", method = RequestMethod.POST)
+	public String avanzaPreparado(@ModelAttribute("command") Pedido ped, ModelMap model) { 
+    	Preparado estado = new Preparado((Confirmado) ped.getEstado());
+    	return this.avanzar(ped, model, estado);
+	} 
+    
+    @RequestMapping(value = "/guardarEnviado.htm", method = RequestMethod.POST)
+	public String avanzaEnviado(@ModelAttribute("command") Pedido ped, ModelMap model) { 
+    	Enviado estado = new Enviado((Preparado) ped.getEstado());
+    	return this.avanzar(ped, model, estado);
+	} 
+    
+    @RequestMapping(value = "/guardarEntregado.htm", method = RequestMethod.POST)
+   	public String avanzaEntregado(@ModelAttribute("command") Pedido ped, ModelMap model) { 
+    	Entregado estado = new Entregado((Enviado) ped.getEstado());
+       	return this.avanzar(ped, model, estado);
+   	} 
+    
+    private String avanzar(Pedido ped, ModelMap model, Estado estado){
+    	ped.setEstado(estado);
+    	this.productManager.guardarPedido(ped);
+	    model.addAttribute("pedidos",this.productManager.darPedidos()); 
+	    model.addAttribute("vista","ABMpedidos.jsp");
+	    return "frontend";
+    }
     
     @RequestMapping(value="/mostrar.htm", method = RequestMethod.GET)
 	public String mostrarPedido(HttpServletRequest req, ModelMap model) { 

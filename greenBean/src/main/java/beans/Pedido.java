@@ -94,14 +94,15 @@ public class Pedido {
 	}
 	
 	@Transient
-	private String auxDetalle;
+	private String auxString;
 
-	public String getAuxDetalle() {
-		return auxDetalle;
+	public String getAuxString() {
+		return auxString;
 	}
-	public void setAuxDetalle(String auxDetalle) {
-		this.auxDetalle = auxDetalle;
+	public void setAuxString(String auxString) {
+		this.auxString = auxString;
 	}
+	
 	
 	
 	/*

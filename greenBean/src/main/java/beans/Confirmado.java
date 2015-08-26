@@ -18,19 +18,10 @@ public class Confirmado extends Estado implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Nuevo nuevo;
 	private String observacion;
 	private Date fechaEntrega;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinColumn(name = "idState")
-	public Nuevo getNuevo() {
-		return nuevo;
-	}
-	public void setNuevo(Nuevo nuevo) {
-		this.nuevo = nuevo;
-	}
+	
 	public String getObservacion() {
 		return observacion;
 	}
@@ -46,9 +37,12 @@ public class Confirmado extends Estado implements Serializable {
 	public Confirmado() {
 		super();
 	}
-	public Confirmado(Nuevo nuevo) {
+	public Confirmado(Nuevo nuevo, String observacion) {
 		super(new Date());
-		this.nuevo = nuevo;
+		this.setAnterior(nuevo);
+		this.setObservacion(observacion);
+		this.getSiguiente().add(Preparado.class);
+		this.getSiguiente().add(Cancelado.class);
 	}
 	
 
