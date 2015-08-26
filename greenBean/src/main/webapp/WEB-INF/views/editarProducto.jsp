@@ -27,7 +27,7 @@
 				<tr>
 					<td>Medida: </td>
 					<td>
-					<form:select path="auxMed">
+					<form:select path="medida.idMedida">
 						<form:option value="0" label="--- Select ---"/>
 					 		<c:forEach items="${medidas}" var="med">
 					  			<c:choose>

@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 
@@ -19,6 +20,13 @@ public class Nuevo extends Estado implements Serializable{
 	public void setDetalle(String detalle) {
 		this.detalle = detalle;
 	}
+	public Nuevo() {
+		super(new Date());
+		this.setAnterior(null);
+		this.getSiguiente().add(Confirmado.class);
+		this.getSiguiente().add(Cancelado.class);
+	}
+	
 	
 	
 

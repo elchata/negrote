@@ -30,14 +30,9 @@ public class Cliente extends User implements Serializable {
 	private List<Direccion> direcciones = new ArrayList<Direccion>(0);
 	private Map<Producto, Integer> visitas = new HashMap<Producto, Integer>();
 	private List<Pedido> pedidos = new ArrayList<Pedido>(0);
-<<<<<<< HEAD
-	private Contenedor carrito;
-	@ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
-=======
 	private Carrito carrito;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
->>>>>>> bb8667afb14b1d081f13821ffa43fc221cd0e06d
+	@ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(
 			name="cliente_direccion",

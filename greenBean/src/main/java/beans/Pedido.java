@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public class Pedido {
 	private Map<Producto,Integer> productos = new HashMap<Producto, Integer>();
 	private Cliente cliente;
 	private Direccion direccion;
-	private Nuevo estado;
+	private Estado estado;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -66,10 +67,10 @@ public class Pedido {
 		this.cliente = cliente;
 	}	
 	
-	public Nuevo getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
-	public void setEstado(Nuevo estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 	public Pedido(
@@ -83,7 +84,7 @@ public class Pedido {
 	public Pedido() {
 		super();
 	}
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
 	@JoinColumn(name = "idDireccion")
 	public Direccion getDireccion() {
 		return direccion;
@@ -91,6 +92,19 @@ public class Pedido {
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
+	
+	@Transient
+	private String auxString;
+
+	public String getAuxString() {
+		return auxString;
+	}
+	public void setAuxString(String auxString) {
+		this.auxString = auxString;
+	}
+	
+	
+	
 	/*
 	@Transient
 	private Long direccionaux=null ;

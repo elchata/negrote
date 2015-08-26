@@ -414,14 +414,10 @@ public class ImplementServiceManager implements ServiceManager {
 		return userModel.retornarPorId(id);
 	}
 
-
-<<<<<<< HEAD
-=======
 	@Override
 	public Empresa darEmpresaPorNombre(String string) {
 		// TODO Auto-generated method stub
 		return empresaModel.retornarPorNombre(string);
 	}
->>>>>>> bb8667afb14b1d081f13821ffa43fc221cd0e06d
 
 }
