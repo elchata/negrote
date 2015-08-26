@@ -31,7 +31,7 @@ public class Pedido {
 	private Map<Producto,Integer> productos = new HashMap<Producto, Integer>();
 	private Cliente cliente;
 	private Direccion direccion;
-	private Nuevo estado;
+	private Estado estado;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -67,10 +67,10 @@ public class Pedido {
 		this.cliente = cliente;
 	}	
 	
-	public Nuevo getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
-	public void setEstado(Nuevo estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 	public Pedido(
@@ -92,6 +92,18 @@ public class Pedido {
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
+	
+	@Transient
+	private String auxDetalle;
+
+	public String getAuxDetalle() {
+		return auxDetalle;
+	}
+	public void setAuxDetalle(String auxDetalle) {
+		this.auxDetalle = auxDetalle;
+	}
+	
+	
 	/*
 	@Transient
 	private Long direccionaux=null ;

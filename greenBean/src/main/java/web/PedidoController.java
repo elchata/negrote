@@ -64,6 +64,7 @@ public class PedidoController {
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaPedido(@ModelAttribute("command") Pedido ped, ModelMap model, HttpSession session) { 
+    	((Nuevo)ped.getEstado()).setDetalle(ped.getAuxDetalle());
     	this.productManager.guardarPedido(ped);
     	Cliente aux = (Cliente) session.getAttribute("sesion");
     	Long auxCar = aux.getCarrito().getIdContenedor();

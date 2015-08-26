@@ -20,7 +20,7 @@
 							<form:radiobutton path="direccion.idDireccion" label="${dir.calle} ${dir.ciudad.nombre} ${dir.ciudad.partido.nombre }" value="${dir.idDireccion}"/> 
 					</c:forEach>
 				</tr>	
-				<form:textarea path="estado.detalle" rows="5" cols="30" />		 
+				<form:textarea path="auxDetalle" rows="5" cols="30" />		 
 				<tr>
 					<td colspan="3"><input type="submit" value="Enviar Datos"/></td>
 				</tr>
