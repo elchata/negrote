@@ -7,6 +7,7 @@
   <tr>
     <th>Precio Final</th>
     <th>Id Cliente</th>
+    <th>Estado</th>
     <th>Acciones</th>
   </tr>
   <c:forEach items="${pedidos}" var="ped">	
@@ -15,9 +16,9 @@
 	    <td><c:out value="${ped.cliente.idUser}"/></td>
 	    <td>
 	    <form:select path="estado" onchange="editarEstado(this.value, ${ped.idPedido})">
-	    <form:option value="${ped.estado.idEstado }" selected="selected" label="${cat.nombre}"/>
+	    <form:option value="${ped.estado.idEstado }" selected="selected" label="${ped.estado}"/>
 	    <c:forEach items="${ped.estado.siguiente}" var="est">
-		     <form:option value="${cat.idCategoria}" label="${cat.nombre}"/>		
+		     <form:option value="${est.idEstado}" label="${est.class}"/>		
 		</c:forEach> 
 		</td>
 		</form:select>

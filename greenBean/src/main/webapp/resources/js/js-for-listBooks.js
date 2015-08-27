@@ -65,6 +65,14 @@ function editarProv(id) {
 	});
 } 
 
+function editarEstado(nombre, id) {
+	$.get("cambiarEstado.htm?nombre="+nombre+"&idProv=" + id, function(result) {
+		$("#queryDialog").html(result);
+		$('#queryDialog').dialog("option", "title", 'Cambiar Estado');
+		$("#queryDialog").dialog('open'); 
+	});
+}
+
 function editarDatos(id) {
 	$.get("editarDatos.htm?idCli=" + id, function(result) {
 		$("#queryDialog").html(result);
