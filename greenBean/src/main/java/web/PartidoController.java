@@ -65,7 +65,7 @@ public class PartidoController {
 	public String creaPartido(@ModelAttribute("provinciaForm") Provincia prov,@ModelAttribute("partidoForm") Partido part, ModelMap model)  {  
     	
     	part.setProvincia(prov); 
-    	this.productManager.guardarPartido(part);
+    	this.productManager.guardarPartido(part); 
 	    model.addAttribute("partidos",this.productManager.darPartidos()); 
 	    model.addAttribute("vista","ABMpartidos.jsp");
 	    return "frontend";
