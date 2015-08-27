@@ -18,7 +18,7 @@
 				<tr>
 					<td>Categoria Padre : </td>
 					<td>
-					<form:select path="aux">
+					<form:select path="padre.idCategoria">
 						<form:option value="0" label="--- Select ---"/>
 					 		<c:forEach items="${categorias}" var="cat">
 					  			<c:choose>

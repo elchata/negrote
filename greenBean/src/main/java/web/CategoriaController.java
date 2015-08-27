@@ -45,11 +45,7 @@ public class CategoriaController {
 		
 		@RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 		public String creaCategoria(@ModelAttribute("command") Categoria cat, ModelMap model) throws FileNotFoundException { 
-			if (cat.getAux() != 0) {
-				Categoria papa = this.productManager.darCategoria(cat.getAux());
-				cat.setPadre(papa);
-			}
-			else cat.setPadre(null);    
+			if (cat.getPadre().getIdCategoria() == 0) cat.setPadre(null);  
 			if (cat.getAuxImagen().exists() != false) cat.setImagen(this.productManager.subirFoto(cat.getAuxImagen()));
 			else {
 				if (cat.getIdCategoria() != null) cat.setImagen(this.productManager.darCategoria(cat.getIdCategoria()).getImagen());
