@@ -7,7 +7,7 @@
   <tr>
     <th>Precio Final</th>
     <th>Id Cliente</th>
-    <th>Estado</th>
+    <th>Estado actual</th>
     <th>Acciones</th>
   </tr>
   <c:forEach items="${pedidos}" var="ped">	
