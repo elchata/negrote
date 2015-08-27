@@ -45,7 +45,6 @@ public class PartidoController {
 		Long val = Long.parseLong(req.getParameter("idPar"));
 		Partido par=  this.productManager.darPartido(val);
    		model.addAttribute("partidoForm",par);
-   		model.addAttribute("provinciaForm",par.getProvincia());
    		model.addAttribute("partidos",this.productManager.darPartidos()); 
    	    model.addAttribute("provincias",this.productManager.darProvincias()); 
    	    model.addAttribute("vista","editarPartido.jsp");
@@ -55,7 +54,7 @@ public class PartidoController {
     @RequestMapping(value="/eliminar.htm", method = RequestMethod.GET)
 	public String eliminarPartido(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idPar"));
-		this.productManager.borrarDireccion(val);			
+		this.productManager.borrarPartido(val);			
 	    model.addAttribute("partidos",this.productManager.darPartidos()); 
 	    model.addAttribute("vista","ABMpartidos.jsp");
 	    return "frontend";
@@ -64,7 +63,6 @@ public class PartidoController {
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaPartido(@ModelAttribute("provinciaForm") Provincia prov,@ModelAttribute("partidoForm") Partido part, ModelMap model)  {  
     	
-    	part.setProvincia(prov); 
     	this.productManager.guardarPartido(part);
 	    model.addAttribute("partidos",this.productManager.darPartidos()); 
 	    model.addAttribute("vista","ABMpartidos.jsp");
