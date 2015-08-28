@@ -36,7 +36,7 @@ public abstract class Estado implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "idEstado", unique = true, nullable = false)
+	@Column(name = "idEstado", unique = true, nullable = true)
 	public Long getIdEstado() {
 		return idEstado;
 	}
