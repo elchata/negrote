@@ -5,20 +5,20 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
  
 		<h2>Datos Partido</h2>
-		<form:form method="POST" action="./create.htm" modelAttribute="partidoForm">		
+		<form:form method="POST" action="./create.htm">		
 			<table> 
 				<tr>
 					<td>Provincia:</td>
 					<td>
-					<form:select path="provincia.idProvincia">  
+					<form:select path="provinciaForm.idProvincia">  
 						<form:options items="${provincias}" itemLabel="nombre" itemValue="idProvincia" />						 	 
 					</form:select></td>
 				</tr>
 				<tr>
 					<td>Nombre: </td>
-					<td><form:input path="nombre" value="${partidoForm.nombre}"/></td>
+					<td><form:input path="partidoForm.nombre" value="${partidoForm.nombre}"/></td>
 				</tr>
-			<form:hidden path="idPartido"/>		 			 
+			<form:hidden path="partidoForm.idPartido"/>		 			 
 				<tr>
 					<td colspan="3"><input type="submit" value="Enviar Datos"/></td>
 				</tr>

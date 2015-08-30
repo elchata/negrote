@@ -44,7 +44,7 @@ public class PedidoController {
 		Long val = Long.parseLong(req.getParameter("idPed"));
 		Pedido ped = this.productManager.darPedido(val);
 		model.addAttribute("command", ped);
-		model.addAttribute("vista","editar"+req.getParameter("nombre")+".jsp");
+		model.addAttribute("vista","editar"+req.getParameter("idPed")+".jsp");
     	return "frontend";
 	}
     
@@ -71,9 +71,7 @@ public class PedidoController {
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaPedido(@ModelAttribute("command") Pedido ped, ModelMap model, HttpSession session) { 
-    	Nuevo nuevo = new Nuevo();
-    	nuevo.setDetalle(ped.getAuxString());
-    	ped.setEstado(nuevo);
+    	((Nuevo)ped.getEstado()).setDetalle(ped.getAuxString());
     	this.productManager.guardarPedido(ped);
     	Cliente aux = (Cliente) session.getAttribute("sesion");
     	Long auxCar = aux.getCarrito().getIdContenedor();
@@ -134,7 +132,7 @@ public class PedidoController {
     @RequestMapping(value="confirmarCompra.htm", method = RequestMethod.GET)
     public String confirmarPedido(HttpServletRequest req, ModelMap model, HttpSession session){
     	Cliente aux = (Cliente) session.getAttribute("sesion");
-		Pedido nuevo = new Pedido(aux);
+		Pedido nuevo = new Pedido(aux, new Nuevo());
 		model.addAttribute("command", nuevo);
 		model.addAttribute("vista","editarPedido.jsp");
     	return "frontend";

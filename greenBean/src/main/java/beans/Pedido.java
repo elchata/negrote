@@ -67,9 +67,6 @@ public class Pedido {
 		this.cliente = cliente;
 	}	
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinColumn(name = "idEstado")
 	public Estado getEstado() {
 		return estado;
 	}
@@ -83,13 +80,6 @@ public class Pedido {
 		this.productos = cliente.getCarrito().getProductos();
 		this.cliente = cliente;
 		this.estado = estado;
-	}
-	public Pedido(
-			Cliente cliente) {
-		super();
-		this.precioFinal = cliente.getCarrito().getPrecio();
-		this.productos = cliente.getCarrito().getProductos();
-		this.cliente = cliente;
 	}
 	public Pedido() {
 		super();

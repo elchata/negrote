@@ -105,8 +105,6 @@ public interface ServiceManager extends Serializable {
 
 	public void guardarBanda(BandaHoraria ban);
 
-	public void guardarCiudad(Ciudad ciu);
-
 /* DETELE */
 	
 	public void borrarProducto(Long val);
@@ -130,16 +128,12 @@ public interface ServiceManager extends Serializable {
 	public void borrarBanda(Long val);
 
 	public void borrarCarrito(Long val);
-	
-	public void borrarCiudad(Long val);
     
 /* AUX */
     
 	public byte[] subirFoto(File auxImagen) throws FileNotFoundException;
 	
 	public Long existeUser(String id);
-
-
 
 
 
