@@ -33,8 +33,7 @@ public abstract class Estado implements Serializable {
 	private Long idEstado;
 	private Date fecha;
 	private Estado anterior;
-	@Column(columnDefinition="blob") 
-	private ArrayList<Class> siguiente = new ArrayList<Class>();
+	private ArrayList<String> siguiente = new ArrayList<String>();
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -65,10 +64,10 @@ public abstract class Estado implements Serializable {
 	public void setAnterior(Estado anterior) {
 		this.anterior = anterior;
 	}
-	public ArrayList<Class> getSiguiente() {
+	public ArrayList<String> getSiguiente() {
 		return siguiente;
 	}
-	public void setSiguiente(ArrayList<Class> siguiente) {
+	public void setSiguiente(ArrayList<String> siguiente) {
 		this.siguiente = siguiente;
 	}
 	public Estado(){

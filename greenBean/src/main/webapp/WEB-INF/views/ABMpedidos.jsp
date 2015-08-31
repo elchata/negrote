@@ -16,9 +16,9 @@
 	    <td><c:out value="${ped.cliente.idUser}"/></td>
 	    <td>
 	    <form:select path="estado" onchange="editarEstado(this.value, ${ped.idPedido})">
-	    <form:option value="${ped.estado.idEstado }" selected="selected" label="${ped.estado}"/>
+	    <form:option value="${ped.estado.idEstado }" selected="selected" label="${ped.estado['class'].toString()}"/>
 	    <c:forEach items="${ped.estado.siguiente}" var="est">
-		     <form:option value="${est.idEstado}" label="${est.class}"/>		
+		     <form:option value="${est}" label="${est}"/>		
 		</c:forEach> 
 		</td>
 		</form:select>

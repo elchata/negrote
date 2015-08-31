@@ -66,7 +66,7 @@ function editarProv(id) {
 } 
 
 function editarEstado(nombre, id) {
-	$.get("cambiarEstado.htm?nombre="+nombre+"&idProv=" + id, function(result) {
+	$.get("cambiarEstado.htm?nombre="+nombre+"&idPed=" + id, function(result) {
 		$("#queryDialog").html(result);
 		$('#queryDialog').dialog("option", "title", 'Cambiar Estado');
 		$("#queryDialog").dialog('open'); 
