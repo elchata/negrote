@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Entity; 
 
-@Entity
+@Entity(name="confirmado")
 public class Confirmado extends Estado implements Serializable {
 	
 	/**

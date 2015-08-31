@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
-@Entity
+@Entity(name="entregado")
 public class Entregado extends Estado implements Serializable {
 	
 	/**

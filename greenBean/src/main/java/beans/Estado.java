@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,8 +22,8 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED) 
-@Table(name = "estado")
+@Table(name="estado")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class Estado implements Serializable {
 	
 	/**
@@ -32,6 +33,7 @@ public abstract class Estado implements Serializable {
 	private Long idEstado;
 	private Date fecha;
 	private Estado anterior;
+	@Column(columnDefinition="blob") 
 	private ArrayList<Class> siguiente = new ArrayList<Class>();
 	
 	@Id

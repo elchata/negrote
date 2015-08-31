@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
-@Entity
+@Entity(name="nuevo")
 public class Nuevo extends Estado implements Serializable{
 	
 	/**

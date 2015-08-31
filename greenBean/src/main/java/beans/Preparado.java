@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-@Entity
+@Entity(name="preparado")
 public class Preparado extends Estado implements Serializable{
 	
 	/**

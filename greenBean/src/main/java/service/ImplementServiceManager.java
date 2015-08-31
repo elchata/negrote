@@ -19,6 +19,7 @@ import beans.Cliente;
 import beans.Contenedor;
 import beans.Direccion;
 import beans.Empresa;
+import beans.Estado;
 import beans.Medida;
 import beans.Partido;
 import beans.Pedido;
@@ -33,6 +34,7 @@ import daos.ClienteDAO;
 import daos.ContenedorDAO;
 import daos.DireccionDAO;
 import daos.EmpresaDAO;
+import daos.EstadoDAO;
 import daos.MedidaDAO;
 import daos.PartidoDAO;
 import daos.PedidoDAO;
@@ -87,6 +89,9 @@ public class ImplementServiceManager implements ServiceManager {
     @Autowired
     private BandaHorariaDAO bandaHorariaModel;
     
+
+    @Autowired
+    private EstadoDAO estadoModel;
 	
 	/*
 	 * (non-Javadoc)
@@ -314,6 +319,12 @@ public class ImplementServiceManager implements ServiceManager {
 		ciudadModel.actualizar(ciu);
 	}
 
+	@Override
+	public Estado guardarEstado(Estado aux) {
+		return estadoModel.actualizar(aux);
+		
+	}
+
 	
 	/*
 	 * (non-Javadoc)
@@ -431,6 +442,8 @@ public class ImplementServiceManager implements ServiceManager {
 		return empresaModel.retornarPorNombre(string);
 	}
 
+
+	
 
 
 

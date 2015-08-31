@@ -73,6 +73,7 @@ public class PedidoController {
 	public String creaPedido(@ModelAttribute("command") Pedido ped, ModelMap model, HttpSession session) { 
     	Nuevo nuevo = new Nuevo();
     	nuevo.setDetalle(ped.getAuxString());
+    	nuevo = (Nuevo) this.productManager.guardarEstado(nuevo);
     	ped.setEstado(nuevo);
     	this.productManager.guardarPedido(ped);
     	Cliente aux = (Cliente) session.getAttribute("sesion");

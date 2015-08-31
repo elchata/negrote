@@ -14,6 +14,7 @@ import beans.Cliente;
 import beans.Contenedor;
 import beans.Direccion;
 import beans.Empresa;
+import beans.Estado;
 import beans.Medida;
 import beans.Partido;
 import beans.Pedido;
@@ -90,6 +91,8 @@ public interface ServiceManager extends Serializable {
 	public void guardarProducto(Producto prod);
 	
 	public void guardarPedido(Pedido aux);
+	
+	public Estado guardarEstado(Estado aux);
 
 	public Cliente guardarCliente(Cliente aux);
 	
