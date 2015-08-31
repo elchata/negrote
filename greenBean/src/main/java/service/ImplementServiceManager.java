@@ -232,6 +232,11 @@ public class ImplementServiceManager implements ServiceManager {
 		carritoModel.borrar(val);
 	}
 	
+	@Override
+	public void borrarCiudad(Long val) {
+		ciudadModel.borrar(val);		
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * SETTERS
@@ -303,6 +308,12 @@ public class ImplementServiceManager implements ServiceManager {
 		bandaHorariaModel.actualizar(ban);
 		
 	}
+	
+	@Override
+	public void guardarCiudad(Ciudad ciu) {
+		ciudadModel.actualizar(ciu);
+	}
+
 	
 	/*
 	 * (non-Javadoc)
@@ -419,5 +430,8 @@ public class ImplementServiceManager implements ServiceManager {
 		// TODO Auto-generated method stub
 		return empresaModel.retornarPorNombre(string);
 	}
+
+
+
 
 }

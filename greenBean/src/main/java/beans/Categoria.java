@@ -39,7 +39,19 @@ public class Categoria implements Serializable{
 	private byte[] imagen=null;
 	private String descripcion;
 	private boolean activo=true;
-	private List<Producto> productos = new ArrayList<Producto>(0);  
+	private List<Producto> productos = new ArrayList<Producto>(0); 
+	
+	// auxiliar para enviar el idPadre al formulario, no se crea en la base de datos
+	@Transient
+	public Long aux=null ;
+	@Transient
+	public Long getAux(){
+		return aux;
+	}
+	@Transient
+	public void setAux(Long aux) {
+		this.aux = aux;
+	}
 	
 	@Transient
 	private File auxImagen=null;  
